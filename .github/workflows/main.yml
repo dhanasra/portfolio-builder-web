@@ -35,7 +35,7 @@ jobs:
 
     steps:
     - name: Deploy to Firebase
-      uses: w9jds/firebase-action@v3
+      uses: w9jds/firebase-action@v12.4.0
       with:
         args: deploy --only hosting # You can customize this as needed
       env:
