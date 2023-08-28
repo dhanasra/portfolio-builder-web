@@ -24,6 +24,22 @@ dependencies:
   # Routing
   url_strategy: ^0.2.0
 
+  # DB
+  hive_flutter: ^1.1.0
+
+  # Internationalize
+  easy_localization: ^3.0.2
+
+  # Font
+  google_fonts: ^5.1.0
+
+  # Widgets
+  bot_toast: ^4.0.4
+
+  # State Management
+  flutter_bloc: ^8.1.3
+  bloc: ^8.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
