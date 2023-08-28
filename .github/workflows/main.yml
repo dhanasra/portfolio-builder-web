@@ -29,21 +29,14 @@ jobs:
           path: build/web
   
   deploy:
-    name: "Deploy"
+    name: Deploy to Firebase
     runs-on: ubuntu-latest
     needs: build
+
     steps:
-      - name: 📚 Checkout repo
-        uses: actions/checkout@v3
-      - name: ⬇️ Download Artifact
-        uses: actions/download-artifact@master
-        with:
-          name: build
-          path: build/web
-      - name: 🎯 Deploy to firebase
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: "${{ secrets.GH_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_TOKEN }}"
-          channelId: live
-          projectId: portfolio-builder-57d7d
+    - name: Deploy to Firebase
+      uses: w9jds/firebase-action@v3
+      with:
+        args: deploy --only hosting # You can customize this as needed
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
