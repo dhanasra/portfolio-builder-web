@@ -15,21 +15,22 @@ extension DateString on String {
 
 extension StringToText on String {
 
-  headlineLarge(BuildContext context)=>Text(this, style: Theme.of(context).textTheme.headlineLarge);
+  headlineLarge(BuildContext context, {Color? color})=>Text(this, style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: color));
+  headlineMedium(BuildContext context, {Color? color})=>Text(this, style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: color));
   
-  titleLarge(BuildContext context, {Color? color})=>Text(
-    this, style: Theme.of(context).textTheme.titleLarge!.copyWith(color: color));
+  titleLarge(BuildContext context, {Color? color, bool isCenter = false,})=>Text(
+    this, textAlign: isCenter ? TextAlign.center : null, style: Theme.of(context).textTheme.titleLarge!.copyWith(color: color));
   
-  headlineSmall(BuildContext context, {Color? color})=>Text(
-    this, style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: color));
+  headlineSmall(BuildContext context, {Color? color, bool isCenter = false,})=>Text(
+    this, textAlign: isCenter ? TextAlign.center : null, style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: color));
 
   bodySmall(BuildContext context, {Color? color, bool isCenter = false, bool isBold = false})=>Text(
     this, 
     textAlign: isCenter ? TextAlign.center : null,
     style: Theme.of(context).textTheme.bodySmall!.copyWith(color: color, fontWeight: isBold ? FontWeight.w800 : null));
 
-  bodyMedium(BuildContext context, {Color? color, bool isBold = true})=>Text(
-    this, style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: color, fontWeight: !isBold ? FontWeight.w400 : null));
+  bodyMedium(BuildContext context, {Color? color, bool isBold = true, TextAlign? align, double? height})=>Text(
+    this, textAlign: align, style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: color, height: height, fontWeight: !isBold ? FontWeight.w400 : null));
 
   bodyLarge1(BuildContext context, {Color? color, bool isBold = false})=>Text(
     this, style: Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -38,9 +39,10 @@ extension StringToText on String {
       fontWeight: isBold ? FontWeight.w800 : null
     ));
 
-  bodyLarge(BuildContext context, {Color? color, bool isBold = false})=>Text(
-    this, style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+  bodyLarge(BuildContext context, {Color? color, bool isBold = false, TextAlign? align, double? height})=>Text(
+    this, textAlign: align, style: Theme.of(context).textTheme.bodyLarge!.copyWith(
       color: color,
+      height: height,
       fontWeight: isBold ? FontWeight.w800 : null
     ));
 

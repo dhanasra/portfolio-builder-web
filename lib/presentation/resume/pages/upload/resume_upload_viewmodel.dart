@@ -27,11 +27,7 @@ class ResumeUploadViewModel extends BaseViewModel {
         PlatformFile file = result.files.first;
         if(allowedExtensions.contains(file.extension)){
           if (file.size < (2 * 1024 * 1024)) {
-
-            context.read<ResumeBloc>().add(ParseResume());
-
-            toast('File picked', success: true);
-
+            context.read<ResumeBloc>().add(ParseResume(file));
           }else{
             toast('File size exceeded 2MB.', success: false);
           }

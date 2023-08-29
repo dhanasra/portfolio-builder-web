@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:portfolio_builder_ai/constants/assets_const.dart';
 import 'package:portfolio_builder_ai/constants/colors_const.dart';
 import 'package:portfolio_builder_ai/constants/shadow_const.dart';
 import 'package:portfolio_builder_ai/extensions/string_ext.dart';
 import 'package:portfolio_builder_ai/presentation/resume/pages/upload/resume_upload_viewmodel.dart';
 import 'package:portfolio_builder_ai/widgets/e_button.dart';
+
+import '../../bloc/resume_bloc.dart';
 
 class ResumeUploadView extends StatefulWidget {
   const ResumeUploadView({super.key});
@@ -24,39 +28,47 @@ class _ResumeUploadViewState extends State<ResumeUploadView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return BlocListener<ResumeBloc, ResumeState>(
+      listener: (context, state) {
+        if(state is ResumeParsed){
+          
+          print(state.schema);
+
+          context.goNamed('template', extra: state.schema);
+
+        }else if(state is Failure){
+          print('failure');
+        }
+      },
+      child: Scaffold(
+          body: Container(
         color: ColorsConst.background,
         alignment: Alignment.center,
-        child: Container( 
-          constraints: const BoxConstraints(
-            minWidth: 600,
-            maxHeight: 500
-          ),
+        child: Container(
+          constraints: const BoxConstraints(minWidth: 600, maxHeight: 500),
           decoration: BoxDecoration(
-            color: ColorsConst.white,
-            boxShadow: ShadowConst.light(context),
-            borderRadius: BorderRadius.circular(8)
-          ),
+              color: ColorsConst.white,
+              boxShadow: ShadowConst.light(context),
+              borderRadius: BorderRadius.circular(8)),
           padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(AssetsConst.uploadResume, width: 300,),
-
+              Image.asset(
+                AssetsConst.uploadResume,
+                width: 300,
+              ),
               'DOC, DOCX, PDF (2MB)'.labelLarge(context),
-              
               SizedBox(
                 width: 400,
                 child: EButton(
-                  onClick: ()=>_viewModel.pickFile(), 
-                  text: 'UPLOAD RESUME'
-                ),
+                    onClick: () => _viewModel.pickFile(),
+                    text: 'UPLOAD RESUME'),
               ),
             ],
           ),
         ),
-      )
+      )),
     );
   }
 }

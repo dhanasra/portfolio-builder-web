@@ -5,4 +5,10 @@ class ResumeState {}
 
 class ResumeInitial extends ResumeState {}
 
-class ResumeParsed extends ResumeState {}
+class ResumeParsed extends ResumeState {
+  final ResumeSchema schema;
+
+  ResumeParsed(this.schema);
+}
+
+class Failure extends ResumeState {}
