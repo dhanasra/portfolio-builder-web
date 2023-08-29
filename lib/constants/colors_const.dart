@@ -17,6 +17,8 @@ class ColorsConst {
   static const Color white = Color(0xFFFFFFFF);
   static const Color white1 = Color(0x26FFFFFF);
 
+  static const Color background = Color(0xFFFAFAFF);
+
   static const Color grey = Color(0xFFdbdbde);
   static const Color grey1 = Color(0xFF565564);
 

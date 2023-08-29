@@ -27,6 +27,9 @@ dependencies:
   # DB
   hive_flutter: ^1.1.0
 
+  # Network
+  dio: ^5.3.2
+
   # Internationalize
   easy_localization: ^3.0.2
 
@@ -35,6 +38,9 @@ dependencies:
 
   # Widgets
   bot_toast: ^4.0.4
+
+  # File Management
+  file_picker: ^5.3.4
 
   # State Management
   flutter_bloc: ^8.1.3
@@ -48,3 +54,7 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/placeholders/
+    - assets/logos/

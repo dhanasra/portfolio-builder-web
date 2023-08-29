@@ -75,12 +75,13 @@ class AppStyle {
       
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 16, vertical: 16)),
+          minimumSize: const MaterialStatePropertyAll(Size(double.infinity, 50)),
+          padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 16, vertical: 18)),
           backgroundColor: const MaterialStatePropertyAll(ColorsConst.primary),
           textStyle: MaterialStatePropertyAll(
-            GoogleFonts.lato(
+            GoogleFonts.roboto(
               fontWeight: FontWeight.w600,
-              fontSize: 17,
+              fontSize: 14,
               height: 1,
               color: textColor
             )
@@ -231,7 +232,7 @@ class AppStyle {
           fontSize: 16,
           color: textColor
         ),
-        labelLarge: GoogleFonts.lato(
+        labelLarge: GoogleFonts.openSans(
           fontWeight: FontWeight.w400,
           fontSize: 14,
           color: textColor
