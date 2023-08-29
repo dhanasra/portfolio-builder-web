@@ -6,7 +6,11 @@ on:
       - main
 
 jobs: 
-
+  setup:
+    name: Set up Dart
+    uses: dart-lang/setup-dart@v1
+    with:
+      dart-version: 2.19.0
   build_web:
     name: Build Flutter Web
     runs-on: ubuntu-latest
