@@ -7,14 +7,13 @@ import '../../../constants/colors_const.dart';
 import '../../../responsive/sizing_information.dart';
 
 class Skills1 extends StatelessWidget {
-  const Skills1({super.key});
+  final List<String> skills;
+  const Skills1({super.key, required this.skills});
 
   @override
   Widget build(BuildContext context) {
 
     bool isMobileScreen = isMobile(context);
-
-    var skills = ['Html', 'Css', 'javascript', 'Flutter','Vue', 'React'];
 
     return Container(
           color: Colors.black,

@@ -6,7 +6,8 @@ import 'package:portfolio_builder_ai/extensions/int_ext.dart';
 import '../../../responsive/sizing_information.dart';
 
 class About1 extends StatelessWidget {
-  const About1({super.key});
+  final String about;
+  const About1({super.key, required this.about});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class About1 extends StatelessWidget {
                 
                     32.height(),
                 
-                    Text("Hi I'm a professional graphic designer I would like to work with an organization where can learn new skills and increase my abilities for the organizational goals as well as myself", 
+                    Text(about, 
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poly(
                       height: 1.6,

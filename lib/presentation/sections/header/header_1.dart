@@ -43,7 +43,7 @@ class Header1 extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('DHANA SEKARAN', 
+                      Text(name??'Hi !', 
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poly(
                         fontSize: isMobileScreen ? 32 : 64,
@@ -56,7 +56,7 @@ class Header1 extends StatelessWidget {
                         margin: const EdgeInsets.only(top: 8, bottom: 16),
                         color: Colors.white,
                       ),
-                      Text("I am a Flutter Developer", 
+                      Text("I am a ${designation??''}", 
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poly(
                         fontSize: isMobileScreen ? 24 : 28,

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_builder_ai/extensions/int_ext.dart';
-import 'package:portfolio_builder_ai/network/models/education.dart';
-import 'package:portfolio_builder_ai/network/models/project.dart';
+import 'package:portfolio_builder_ai/network/models/resume_schema.dart';
 import 'package:portfolio_builder_ai/presentation/sections/about/about_1.dart';
 import 'package:portfolio_builder_ai/presentation/sections/contact/contact_1.dart';
 import 'package:portfolio_builder_ai/presentation/sections/education/education_1.dart';
@@ -14,17 +13,13 @@ import 'package:portfolio_builder_ai/presentation/sections/projects/project_1.da
 import 'package:portfolio_builder_ai/presentation/sections/skills/skills_1.dart';
 import 'package:portfolio_builder_ai/presentation/templates/pages/template_viewmodel.dart';
 import 'package:portfolio_builder_ai/widgets/t_button.dart';
-
-import '../../../network/models/work_experience.dart';
 import '../../sections/work/work_1.dart';
 
-
-
-
-
 class TemplateView extends StatefulWidget {
+  final ResumeSchema schema;
   const TemplateView({
     super.key,
+    required this.schema
   });
 
   @override
@@ -45,7 +40,7 @@ class _TemplateViewState extends State<TemplateView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('DHANA SEKARAN', 
+        title: Text(widget.schema.name??'Hi !', 
           textAlign: TextAlign.center,
           style: GoogleFonts.poly(
             fontSize: 18,
@@ -112,89 +107,30 @@ class _TemplateViewState extends State<TemplateView> {
       body: ListView(
         controller: _viewModel.controller,
         children: [
-
           Header1(
+            name: widget.schema.name,
+            designation: 'Flutter developer',
             key: _viewModel.headerKey,
           ),
+          if(widget.schema.summary!=null)
           About1(
+            about: widget.schema.summary!,
             key: _viewModel.aboutKey,
           ),
           Skills1(
+            skills: const ['html', 'Vue', 'Javascript'],
             key: _viewModel.skillKey,
           ),
           Education1(
             key: _viewModel.educationKey,
-            education: const [
-              Education(
-                institution: 'KLN College of Engineering', 
-                degree: 'ECE', 
-                major: 'Communication', 
-                graduationDate: '2021'
-              ),
-              Education(
-                institution: "St mary's Hr Sec School", 
-                degree: '12th', 
-                major: 'Bio Maths', 
-                graduationDate: '2018'
-              ),
-              Education(
-                institution: "St mary's Hr Sec School", 
-                degree: '10th', 
-                major: '', 
-                graduationDate: '2016'
-              )
-            ],
+            education: widget.schema.education??[],
           ),
           Work1(
             key: _viewModel.workKey,
-            experiences: const [
-              WorkExperience(
-                jobTitle: 'Flutter Developer',
-                employer: 'Vaken Technologies Pvt. Ltd',
-                startDate: 'May 2021',
-                endDate: 'June 2022'
-              ),
-              WorkExperience(
-                jobTitle: 'Flutter Developer',
-                employer: 'Vaken Technologies Pvt. Ltd',
-                startDate: 'May 2021',
-                endDate: 'June 2022'
-              ),
-              WorkExperience(
-                jobTitle: 'Flutter Developer',
-                employer: 'Vaken Technologies Pvt. Ltd',
-                startDate: 'May 2021',
-                endDate: 'June 2022'
-              ),
-              WorkExperience(
-                jobTitle: 'Flutter Developer',
-                employer: 'Vaken Technologies Pvt. Ltd',
-                startDate: 'May 2021',
-                endDate: 'June 2022'
-              )
-            ],
+            experiences: widget.schema.workExperience??[],
           ),
-          const Project1(
-            projects: [
-                Project(
-                  name: 'Flutter Chat App',
-                  description: 'A real-time chat application built with Flutter.',
-                  technologiesUsed: ['Flutter', 'Firebase', 'Dart'],
-                  url: 'https://github.com/yourusername/flutter-chat-app',
-                ),
-                Project(
-                  name: 'E-commerce Website',
-                  description: 'An e-commerce website with product listings and shopping cart functionality.',
-                  technologiesUsed: ['HTML', 'CSS', 'JavaScript', 'React'],
-                  url: 'https://github.com/yourusername/e-commerce-website',
-                ),
-                Project(
-                  name: 'Expense Tracker App',
-                  description: 'Track your expenses and budget with this mobile app.',
-                  technologiesUsed: ['React Native', 'Redux', 'Node.js'],
-                  url: 'https://github.com/yourusername/expense-tracker-app',
-                )
-            ],
+          Project1(
+            projects: widget.schema.projects??[],
           ),
           Contact1(
             key: _viewModel.contactKey,
