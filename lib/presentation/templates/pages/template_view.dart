@@ -4,11 +4,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_builder_ai/extensions/int_ext.dart';
 import 'package:portfolio_builder_ai/network/models/education.dart';
+import 'package:portfolio_builder_ai/network/models/project.dart';
 import 'package:portfolio_builder_ai/presentation/sections/about/about_1.dart';
 import 'package:portfolio_builder_ai/presentation/sections/contact/contact_1.dart';
 import 'package:portfolio_builder_ai/presentation/sections/education/education_1.dart';
 import 'package:portfolio_builder_ai/presentation/sections/footer/footer_1.dart';
 import 'package:portfolio_builder_ai/presentation/sections/header/header_1.dart';
+import 'package:portfolio_builder_ai/presentation/sections/projects/project_1.dart';
 import 'package:portfolio_builder_ai/presentation/sections/skills/skills_1.dart';
 import 'package:portfolio_builder_ai/presentation/templates/pages/template_viewmodel.dart';
 import 'package:portfolio_builder_ai/widgets/t_button.dart';
@@ -170,6 +172,28 @@ class _TemplateViewState extends State<TemplateView> {
                 startDate: 'May 2021',
                 endDate: 'June 2022'
               )
+            ],
+          ),
+          const Project1(
+            projects: [
+                Project(
+                  name: 'Flutter Chat App',
+                  description: 'A real-time chat application built with Flutter.',
+                  technologiesUsed: ['Flutter', 'Firebase', 'Dart'],
+                  url: 'https://github.com/yourusername/flutter-chat-app',
+                ),
+                Project(
+                  name: 'E-commerce Website',
+                  description: 'An e-commerce website with product listings and shopping cart functionality.',
+                  technologiesUsed: ['HTML', 'CSS', 'JavaScript', 'React'],
+                  url: 'https://github.com/yourusername/e-commerce-website',
+                ),
+                Project(
+                  name: 'Expense Tracker App',
+                  description: 'Track your expenses and budget with this mobile app.',
+                  technologiesUsed: ['React Native', 'Redux', 'Node.js'],
+                  url: 'https://github.com/yourusername/expense-tracker-app',
+                )
             ],
           ),
           Contact1(

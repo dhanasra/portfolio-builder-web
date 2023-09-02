@@ -125,7 +125,7 @@ class AppStyle {
         ),
         labelStyle: GoogleFonts.lato(
           fontWeight: FontWeight.w600,
-          fontSize: 16,
+          fontSize: 14,
           color: ColorsConst.primary
         ),
       ),
