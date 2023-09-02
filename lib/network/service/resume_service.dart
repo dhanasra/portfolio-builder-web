@@ -13,7 +13,7 @@ class ResumeService {
   }
 
   getResumeSchema(String content)async{
-    final response = await ApiClient(ApisConst.resumeSchema, loader: false).post(
+    final response = await ApiClient(ApisConst.resumeSchema, loader: false, isAICall: true).post(
       {
         'content': content
       }

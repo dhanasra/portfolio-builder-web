@@ -20,19 +20,19 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> {
   final _service = ResumeService();
 
   _onParseResume(ParseResume event, Emitter emit)async{
-    showLoader();
+    emit(Uploading());
     try{
 
       var fileUrl = await _uploadFile(event.file);
       toast('File uploaded');
+      emit(Parsing());
       var parsedResume = await _service.parseResumeData(fileUrl);
       toast('File parsed');
+      emit(Building());
       var data = await _service.getResumeSchema(parsedResume);
       ResumeSchema schema = ResumeSchema.fromMap(json.decode(data));
-      hideLoader();
       emit(ResumeParsed(schema));
     }catch(error){
-      hideLoader();
       emit(Failure());
     }
   }

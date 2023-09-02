@@ -6,10 +6,12 @@ class BSContainer extends StatelessWidget {
   final EdgeInsets? padding;
   final EdgeInsets? margin;
   final Widget child;
+  final bool removeDecoration;
   const BSContainer({
     super.key,
     this.padding,
     this.margin,
+    this.removeDecoration = false,
     required this.child  
   });
 
@@ -18,12 +20,13 @@ class BSContainer extends StatelessWidget {
     return Container(
       padding: padding,
       margin: margin,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Theme.of(context).dividerColor
-        ),
+      constraints: const BoxConstraints(
+        maxWidth: 800
+      ),
+      decoration: removeDecoration ? null : BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
         boxShadow: ShadowConst.light(context),
-        borderRadius: BorderRadius.circular(8)
+        borderRadius: BorderRadius.circular(2)
       ),
       child: child,
     );

@@ -13,9 +13,9 @@ class ApiClient {
 
   final Map<String, String>? additionalHeaders;
 
-  ApiClient(this.path, {this.loader=true, this.errToast=true,this.additionalHeaders}){
+  ApiClient(this.path, {this.loader=true, this.errToast=true,this.additionalHeaders, bool isAICall = false}){
     dio = Dio();
-    dio.options.baseUrl = ApisConst.apiHost;
+    dio.options.baseUrl = isAICall ? ApisConst.aiHost: ApisConst.apiHost;
     dio.interceptors.add(ApiInterceptors(
       dio: dio, 
       additionalHeaders: additionalHeaders,

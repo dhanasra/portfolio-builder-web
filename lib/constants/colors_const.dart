@@ -5,7 +5,7 @@ class ColorsConst {
 
   ColorsConst._();
 
-  static const Color primary = Color(0xFF01042D);
+  static const Color primary = Color(0xFF11BB92);
   static const Color primary1 = Color(0xFF181C52);
   static const Color primary2 = Color(0xFF0C0F40);
   
@@ -21,6 +21,8 @@ class ColorsConst {
 
   static const Color grey = Color(0xFFdbdbde);
   static const Color grey1 = Color(0xFF565564);
+
+  static const Color shadow = Color(0x40000000);
 
   static const Color text = Color(0xFF333333);
 

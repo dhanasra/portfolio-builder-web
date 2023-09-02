@@ -19,6 +19,8 @@ class AppStyle {
 
       primaryColor: ColorsConst.primary,
       dividerColor: ColorsConst.grey,
+      shadowColor: ColorsConst.shadow,
+      scaffoldBackgroundColor: ColorsConst.white,
 
       tabBarTheme: TabBarTheme(
         labelStyle: GoogleFonts.lato(
@@ -46,7 +48,9 @@ class AppStyle {
       ),
 
       appBarTheme: AppBarTheme(
-        backgroundColor: ColorsConst.primary,
+        centerTitle: false,
+        backgroundColor: ColorsConst.white,
+        elevation: 2,
         titleTextStyle: GoogleFonts.lato(
           fontWeight: FontWeight.w600,
           fontSize: 22,
@@ -63,13 +67,15 @@ class AppStyle {
 
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          textStyle: GoogleFonts.lato(
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
+          minimumSize: const Size(double.infinity, 50),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+          textStyle: GoogleFonts.roboto(
+              fontWeight: FontWeight.w400,
+              fontSize: 18,
               height: 1,
-              color: textColor
+              color: ColorsConst.primary
             ),
-          side: const BorderSide(color: ColorsConst.primary2, width: 0.6),
+          side: const BorderSide(color: ColorsConst.primary, width: 1),
         )
       ),
       
@@ -80,10 +86,10 @@ class AppStyle {
           backgroundColor: const MaterialStatePropertyAll(ColorsConst.primary),
           textStyle: MaterialStatePropertyAll(
             GoogleFonts.roboto(
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              fontSize: 18,
               height: 1,
-              color: textColor
+              color: ColorsConst.white
             )
           )
         )
@@ -201,8 +207,8 @@ class AppStyle {
           fontWeight: FontWeight.w700,
           fontSize: 30
         ),
-        headlineSmall: GoogleFonts.lato(
-          fontWeight: FontWeight.w800,
+        headlineSmall: GoogleFonts.openSans(
+          fontWeight: FontWeight.w700,
           fontSize: 26
         ),
         titleLarge: GoogleFonts.lato(
@@ -227,7 +233,7 @@ class AppStyle {
           fontSize: 18,
           color: textColor
         ),
-        bodySmall: GoogleFonts.lato(
+        bodySmall: GoogleFonts.roboto(
           fontWeight: FontWeight.w400,
           fontSize: 16,
           color: textColor

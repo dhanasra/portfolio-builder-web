@@ -24,10 +24,12 @@ extension StringToText on String {
   headlineSmall(BuildContext context, {Color? color, bool isCenter = false,})=>Text(
     this, textAlign: isCenter ? TextAlign.center : null, style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: color));
 
-  bodySmall(BuildContext context, {Color? color, bool isCenter = false, bool isBold = false})=>Text(
+  bodySmall(BuildContext context, {Color? color, bool isCenter = false, bool isBold = false, double? height})=>Text(
     this, 
     textAlign: isCenter ? TextAlign.center : null,
-    style: Theme.of(context).textTheme.bodySmall!.copyWith(color: color, fontWeight: isBold ? FontWeight.w800 : null));
+    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+      height: height,
+      color: color, fontWeight: isBold ? FontWeight.w800 : null));
 
   bodyMedium(BuildContext context, {Color? color, bool isBold = true, TextAlign? align, double? height})=>Text(
     this, textAlign: align, style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: color, height: height, fontWeight: !isBold ? FontWeight.w400 : null));
