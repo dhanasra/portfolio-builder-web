@@ -1,22 +1,28 @@
 
 import 'package:flutter/material.dart';
-import 'package:portfolio_builder_ai/constants/colors_const.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_builder_ai/extensions/int_ext.dart';
-import 'package:portfolio_builder_ai/extensions/string_ext.dart';
-import 'package:portfolio_builder_ai/network/models/resume_schema.dart';
-import 'package:portfolio_builder_ai/presentation/templates/widgets/text_container.dart';
-import 'package:portfolio_builder_ai/presentation/templates/widgets/timeline_item.dart';
-import 'package:portfolio_builder_ai/widgets/e_button.dart';
-import 'package:portfolio_builder_ai/widgets/input_field.dart';
+import 'package:portfolio_builder_ai/network/models/education.dart';
+import 'package:portfolio_builder_ai/presentation/sections/about/about_1.dart';
+import 'package:portfolio_builder_ai/presentation/sections/contact/contact_1.dart';
+import 'package:portfolio_builder_ai/presentation/sections/education/education_1.dart';
+import 'package:portfolio_builder_ai/presentation/sections/footer/footer_1.dart';
+import 'package:portfolio_builder_ai/presentation/sections/header/header_1.dart';
+import 'package:portfolio_builder_ai/presentation/sections/skills/skills_1.dart';
+import 'package:portfolio_builder_ai/presentation/templates/pages/template_viewmodel.dart';
+import 'package:portfolio_builder_ai/widgets/t_button.dart';
+
+import '../../../network/models/work_experience.dart';
+import '../../sections/work/work_1.dart';
+
 
 
 
 
 class TemplateView extends StatefulWidget {
-  final ResumeSchema schema;
   const TemplateView({
     super.key,
-    required this.schema  
   });
 
   @override
@@ -25,230 +31,151 @@ class TemplateView extends StatefulWidget {
 
 class _TemplateViewState extends State<TemplateView> {
 
-  int i = 0;
+  late TemplateViewModel _viewModel;
 
   @override
   void initState() {
+    _viewModel = TemplateViewModel(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsConst.primary,
+      appBar: AppBar(
+        title: Text('DHANA SEKARAN', 
+          textAlign: TextAlign.center,
+          style: GoogleFonts.poly(
+            fontSize: 18,
+            fontWeight: FontWeight.w400,
+            color: Colors.white
+          )),
+        backgroundColor: const Color(0xFF11234B),
+        actions: [
+          TButton(
+            onClick: ()=>_viewModel.scrollToKey(_viewModel.aboutKey), 
+            text: 'About', 
+            isWhite: true,
+            styled: true,
+          ),
+          16.width(),
+          TButton(
+            onClick: ()=>_viewModel.scrollToKey(_viewModel.skillKey), 
+            text: 'Tech Stack', 
+            isWhite: true,
+            styled: true,
+          ),
+          16.width(),
+          TButton(
+            onClick: ()=>_viewModel.scrollToKey(_viewModel.educationKey), 
+            text: 'Education', 
+            isWhite: true,
+            styled: true,
+          ),
+          16.width(),
+          TButton(
+            onClick: ()=>_viewModel.scrollToKey(_viewModel.workKey), 
+            text: 'Careers', 
+            isWhite: true,
+            styled: true,
+          ),
+          16.width(),
+          TButton(
+            onClick: ()=>_viewModel.scrollToKey(_viewModel.contactKey), 
+            text: 'Contact', 
+            isWhite: true,
+            styled: true,
+          ),
+          24.width(),
+          IconButton(
+            splashRadius: 20,
+            onPressed: (){}, 
+            iconSize: 16,
+            icon: const Icon(FontAwesomeIcons.facebookF)),
+          4.width(),
+          IconButton(
+            splashRadius: 20,
+            onPressed: (){}, 
+            iconSize: 16,
+            icon: const Icon(FontAwesomeIcons.github)),
+          4.width(),
+          IconButton(
+            splashRadius: 20,
+            onPressed: (){}, 
+            iconSize: 16,
+            icon: const Icon(FontAwesomeIcons.linkedinIn)),
+          16.width(),
+        ],
+      ),
       body: ListView(
+        controller: _viewModel.controller,
         children: [
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 0.8.screenHeight(context),
-                color: ColorsConst.primary,
-                padding: const EdgeInsets.all(30),
-                child: Row(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        "Hi, I'm ${widget.schema.name}".headlineLarge(context, color: ColorsConst.white),
-                        "a, Flutter developer.".titleLarge(context, color: ColorsConst.white),
-
-                        60.height(),
-                        Row(
-                            children: [
-                              Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: (){},
-                                  child: Container(
-                                    width: 160,
-                                    height: 46,
-                                    decoration: BoxDecoration(
-                                      color: ColorsConst.white,
-                                      borderRadius: BorderRadius.circular(4)
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: 'Contact Me'.bodySmall(context, isBold: true)),
-                                ),
-                              ),
-
-                              24.width(),
-
-                              Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: (){},
-                                  child: Container(
-                                    width: 160,
-                                    height: 46,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4),
-                                      border: Border.all(color: ColorsConst.white)
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: 'Check My Work'.bodySmall(context, isBold: true, color: ColorsConst.white)),
-                                ),
-                              )
-                        
-                            ],
-                          )
-                      ],
-                    )
-
-                  ],
-                ),
+          Header1(
+            key: _viewModel.headerKey,
+          ),
+          About1(
+            key: _viewModel.aboutKey,
+          ),
+          Skills1(
+            key: _viewModel.skillKey,
+          ),
+          Education1(
+            key: _viewModel.educationKey,
+            education: const [
+              Education(
+                institution: 'KLN College of Engineering', 
+                degree: 'ECE', 
+                major: 'Communication', 
+                graduationDate: '2021'
               ),
+              Education(
+                institution: "St mary's Hr Sec School", 
+                degree: '12th', 
+                major: 'Bio Maths', 
+                graduationDate: '2018'
+              ),
+              Education(
+                institution: "St mary's Hr Sec School", 
+                degree: '10th', 
+                major: '', 
+                graduationDate: '2016'
+              )
             ],
           ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 900
-                ),
-                child: Column(
-                  children: [
-                    'About'.headlineMedium(context, color: ColorsConst.white),
-                    Container(
-                      width: 100,
-                      height: 6,
-                      margin: const EdgeInsets.only(top: 12),
-                      color: Colors.white,
-                    ),
-                    30.height(),
-                    (widget.schema.summary??'')
-                      .bodyLarge(context, color: ColorsConst.white, align: TextAlign.center, height: 2),
-                    100.height(),
-                  ],
-                ),
+          Work1(
+            key: _viewModel.workKey,
+            experiences: const [
+              WorkExperience(
+                jobTitle: 'Flutter Developer',
+                employer: 'Vaken Technologies Pvt. Ltd',
+                startDate: 'May 2021',
+                endDate: 'June 2022'
               ),
+              WorkExperience(
+                jobTitle: 'Flutter Developer',
+                employer: 'Vaken Technologies Pvt. Ltd',
+                startDate: 'May 2021',
+                endDate: 'June 2022'
+              ),
+              WorkExperience(
+                jobTitle: 'Flutter Developer',
+                employer: 'Vaken Technologies Pvt. Ltd',
+                startDate: 'May 2021',
+                endDate: 'June 2022'
+              ),
+              WorkExperience(
+                jobTitle: 'Flutter Developer',
+                employer: 'Vaken Technologies Pvt. Ltd',
+                startDate: 'May 2021',
+                endDate: 'June 2022'
+              )
             ],
           ),
-
-          if(widget.schema.workExperience!=null)
-          Container(
-            color: ColorsConst.primary,
-            padding: const EdgeInsets.all(30),
-            child: Column(
-              children: [
-
-                'My Career'.headlineMedium(context, color: ColorsConst.white),
-
-                Container(
-                  width: 100,
-                  height: 6,
-                  margin: const EdgeInsets.only(top: 12),
-                  color: Colors.white,
-                ),
-
-                60.height(),
-
-                ...widget.schema.workExperience!.map((e){
-                  return TimeLineItem(
-                    dateTime: '${e.startDate} - ${e.endDate}', 
-                    reverse: (++i%2)==0, 
-                    text: '${e.jobTitle}'
-                  );
-                }).toList()
-
-              ],
-            )
+          Contact1(
+            key: _viewModel.contactKey,
           ),
-
-          100.height(),
-
-          Column(
-            children: [
-              'My Projects'.headlineMedium(context, color: ColorsConst.white),
-
-              Container(
-                width: 100,
-                height: 6,
-                margin: const EdgeInsets.only(top: 12),
-                color: Colors.white,
-              ),
-
-              60.height()
-            ],
-          ),
-          
-          if(widget.schema.projects!=null)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: 900
-                ),
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: widget.schema.projects!.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 30,
-                    crossAxisSpacing: 30,
-                    crossAxisCount: widget.schema.projects!.length<=3? widget.schema.projects!.length: 3
-                  ), 
-                  itemBuilder: (_, index){
-                    return TextContainer(
-                      name: widget.schema.projects![index].name??'',
-                      desc: widget.schema.projects![index].description??'');
-                  }),
-              ),
-            ],
-          ),
-
-          120.height(),
-
-          Container(
-            color: ColorsConst.secondary,
-            height: 6,
-          ),
-
-          Container(
-            color: ColorsConst.white,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    maxWidth: 1200
-                  ),
-                  child: Column(
-                    children: [
-
-                        60.height(),
-                        'Contact'.headlineMedium(context),
-                            
-                        Container(
-                          width: 100,
-                          height: 6,
-                          margin: const EdgeInsets.only(top: 12),
-                          color: ColorsConst.primary,
-                        ),
-                
-                        60.height(),
-                        InputField(
-                          controller: TextEditingController(),
-                          maxLines: 10,
-                          hintText: 'Enter your message here',  
-                        ),
-
-                        32.height(),
-
-                        EButton(onClick: (){}, text: 'SEND'),
-
-                      60.height(),
-                    ],
-                  ),
-                )
-          
-              ],
-            ),
-          ),
+          const Footer1()
 
         ],
       ),

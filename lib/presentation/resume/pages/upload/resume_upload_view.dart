@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:portfolio_builder_ai/constants/colors_const.dart';
 import 'package:portfolio_builder_ai/extensions/int_ext.dart';
 import 'package:portfolio_builder_ai/extensions/string_ext.dart';
@@ -31,7 +32,11 @@ class _ResumeUploadViewState extends State<ResumeUploadView> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ResumeBloc, ResumeState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is ResumeParsed){
+          context.goNamed('template', extra: state.schema);
+        }
+      },
       child: Scaffold(
           appBar: AppBar(
             title: const SplashLogo(),

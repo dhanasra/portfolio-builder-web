@@ -11,7 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Icons
   cupertino_icons: ^1.0.2
+  font_awesome_flutter: ^10.5.0
 
   # Firebase
   firebase_core: ^2.15.1
@@ -40,6 +42,7 @@ dependencies:
 
   # Widgets
   bot_toast: ^4.0.4
+  dotted_border: ^2.0.0+3
 
   # File Management
   file_picker: ^5.3.4
