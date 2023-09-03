@@ -7,10 +7,12 @@ class EButton extends StatelessWidget {
   final VoidCallback onClick;
   final Color? bgColor;
   final bool rounded;
+  final double? maxWidth;
   const EButton({
     super.key,
     required this.onClick,
     this.bgColor,
+    this.maxWidth,
     this.rounded = false,
     required this.text  
   });
@@ -19,6 +21,7 @@ class EButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
+        maximumSize: maxWidth!=null ? MaterialStatePropertyAll(Size(maxWidth!, 50)) : null,
         backgroundColor: bgColor!=null ? MaterialStatePropertyAll(bgColor) : null,
         foregroundColor: bgColor!=null ? const MaterialStatePropertyAll(ColorsConst.primary) : null,
         shape: rounded ? MaterialStatePropertyAll(

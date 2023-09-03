@@ -71,7 +71,7 @@ class AppStyle {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
           textStyle: GoogleFonts.roboto(
               fontWeight: FontWeight.w400,
-              fontSize: 18,
+              fontSize: 17,
               height: 1,
               color: ColorsConst.primary
             ),
@@ -87,7 +87,7 @@ class AppStyle {
           textStyle: MaterialStatePropertyAll(
             GoogleFonts.roboto(
               fontWeight: FontWeight.w400,
-              fontSize: 18,
+              fontSize: 17,
               height: 1,
               color: ColorsConst.white
             )

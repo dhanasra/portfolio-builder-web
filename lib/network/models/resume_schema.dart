@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:portfolio_builder_ai/network/models/basic.dart';
 
 import 'package:portfolio_builder_ai/network/models/education.dart';
 import 'package:portfolio_builder_ai/network/models/project.dart';
@@ -10,6 +11,7 @@ class ResumeSchema extends Equatable {
 
   final String? name;
   final String? summary;
+  final Basic basic;
   final List<Education>? education;
   final List<WorkExperience>? workExperience;
   final List<Project>? projects;
@@ -17,6 +19,7 @@ class ResumeSchema extends Equatable {
   const ResumeSchema({
     this.name,
     this.summary,
+    required this.basic,
     this.education,
     this.workExperience,
     this.projects,
@@ -25,12 +28,14 @@ class ResumeSchema extends Equatable {
   ResumeSchema copyWith({
     String? name,
     String? summary,
+    Basic? basic,
     List<Education>? education,
     List<WorkExperience>? workExperience,
     List<Project>? projects,
   }) {
     return ResumeSchema(
       name: name ?? this.name,
+      basic: basic ?? this.basic,
       summary: summary ?? this.summary,
       education: education ?? this.education,
       workExperience: workExperience ?? this.workExperience,
@@ -41,6 +46,7 @@ class ResumeSchema extends Equatable {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': name,
+      'basic': basic.toMap(),
       'summary': summary,
       'education': education?.map((x) => x.toMap()).toList(),
       'workExperience': workExperience?.map((x) => x.toMap()).toList(),
@@ -50,6 +56,7 @@ class ResumeSchema extends Equatable {
 
   factory ResumeSchema.fromMap(Map map) {
     return ResumeSchema(
+      basic: map['basic']!=null? Basic.fromMap(map['basic']): const Basic(),
       name: map['name'] != null ? map['name'] as String : null,
       summary: map['summary'] != null ? map['summary'] as String : null,
       education: map['education'] != null ? List<Education>.from((map['education'] as List).map<Education?>((x) => Education.fromMap(x as Map<String,dynamic>),),) : null,

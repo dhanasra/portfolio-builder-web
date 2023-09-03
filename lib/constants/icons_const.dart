@@ -5,6 +5,25 @@ class IconsConst {
 
   IconsConst._();
 
+  static IconData? getSectionIcon(String section) {
+    Map<String, IconData> sectionIcons = {
+        'Basics': FontAwesomeIcons.user,
+        'Work': FontAwesomeIcons.suitcase,
+        'Volunteer': FontAwesomeIcons.handsHolding,
+        'Education': FontAwesomeIcons.book,
+        'Awards': FontAwesomeIcons.award,
+        'Certificates': FontAwesomeIcons.certificate,
+        'Publications': FontAwesomeIcons.solidNoteSticky,
+        'Skills': FontAwesomeIcons.lightbulb, 
+        'Languages': FontAwesomeIcons.language, 
+        'Interests': FontAwesomeIcons.heart, 
+        'Projects': FontAwesomeIcons.listCheck, 
+        'References': FontAwesomeIcons.peopleGroup
+      };
+
+    return sectionIcons[section];
+  }
+
   static IconData? getTechnologyIcon(String technology) {
     
     Map<String, IconData> technologyColors = {

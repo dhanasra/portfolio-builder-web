@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:portfolio_builder_ai/presentation/editor/pages/template_editor/template_editor_view.dart';
 import 'package:portfolio_builder_ai/presentation/resume/pages/upload/resume_upload_view.dart';
 import 'package:portfolio_builder_ai/presentation/templates/pages/template_view.dart';
 
@@ -24,6 +25,15 @@ final GoRouter router = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return TemplateView(
           schema: state.extra as ResumeSchema,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/template-editor',
+      name: 'template-editor',
+      builder: (BuildContext context, GoRouterState state) {
+        return const TemplateEditorView(
+          
         );
       },
     ),

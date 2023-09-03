@@ -94,6 +94,7 @@ class InputField extends StatelessWidget {
         ],
         keyboardType: numberOnly ? const TextInputType.numberWithOptions(decimal: true) : null,
         decoration: InputDecoration(
+          alignLabelWithHint: true,
           contentPadding: noPadding ? const EdgeInsets.all(0) : null,
           constraints: constraints,
           labelText: floatingLabel && labelText!=null && labelText!.isNotEmpty 

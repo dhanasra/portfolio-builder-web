@@ -5,7 +5,7 @@ class ColorsConst {
 
   ColorsConst._();
 
-  static const Color primary = Color(0xFF11BB92);
+  static const Color primary = Color.fromARGB(255, 17, 89, 78);
   static const Color primary1 = Color(0xFF181C52);
   static const Color primary2 = Color(0xFF0C0F40);
   

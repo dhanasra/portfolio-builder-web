@@ -67,7 +67,7 @@ extension StringToText on String {
 
 extension TextEditingControllerTrim on TextEditingController {
 
-  trim()=>text.trim();
+  String trim()=>text.trim();
 
   double toDouble()=>text.trim().isNotEmpty ? double.parse(double.parse(text.trim()).toStringAsFixed(2)) : 0.00;
 

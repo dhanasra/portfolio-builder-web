@@ -40,6 +40,7 @@ class _TemplateViewState extends State<TemplateView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(widget.schema.name??'Hi !', 
           textAlign: TextAlign.center,
           style: GoogleFonts.poly(
