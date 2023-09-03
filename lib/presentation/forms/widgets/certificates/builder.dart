@@ -2,57 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio_builder_ai/extensions/int_ext.dart';
 import 'package:portfolio_builder_ai/extensions/string_ext.dart';
-import 'package:portfolio_builder_ai/network/models/work_experience.dart';
-import 'package:portfolio_builder_ai/presentation/forms/widgets/work_item.dart';
+import 'package:portfolio_builder_ai/network/models/certificate.dart';
+import 'package:portfolio_builder_ai/presentation/forms/widgets/certificates/item.dart';
 import 'package:portfolio_builder_ai/widgets/e_button.dart';
 import 'package:portfolio_builder_ai/widgets/o_button.dart';
 
 
-class WorkBuilder extends StatelessWidget {
-  final List<WorkExperience> experience;
+class CertificatesBuilder extends StatelessWidget {
+  final List<Certificate> certificate;
   final ValueNotifier mode;
-  final ValueNotifier works;
+  final ValueNotifier certificates;
   final ValueNotifier edited;
-  const WorkBuilder({
+  const CertificatesBuilder({
     super.key, 
-    required this.experience,
+    required this.certificate,
     required this.edited,
     required this.mode,
-    required this.works
+    required this.certificates
   });
 
   @override
   Widget build(BuildContext context) {
 
-    // experience.add(
-    //   const WorkExperience(
-    //     jobTitle: 'Flutter Developer',
-    //     employer: 'Instrive Soft Labs',
-    //     startDate: '22 Jan, 2018',
-    //     endDate: '16 Dec, 2016',
-    //     description: 'Worked as Senior architect in Turbo Talent, Job portal application',
-    //     achievements: [
-    //       'Best employee award'
-    //     ]
-    //   )
-    // );
-
     return Expanded(
-      child: experience.isNotEmpty
+      child: certificate.isNotEmpty
         ? ListView(
           padding: const EdgeInsets.all(16),
           children: [
             EButton(
               onClick: ()=>mode.value = true, 
-              text: 'Add New Experience'
+              text: 'Add New Certificate'
             ),
             20.height(),
-            ...experience.map(
-              (e) => WorkItem(
-                experience: e,
+            ...certificate.map(
+              (e) => CertificateItem(
+                certificate: e,
                 onDelete: (){
-                  works.value.removeAt(works.value.indexOf(e));
-                  works.notifyListeners();
+                  certificates.value.removeAt(certificates.value.indexOf(e));
+                  certificates.notifyListeners();
                 },
                 onEdit: (){
                   edited.value = e;
@@ -69,7 +56,7 @@ class WorkBuilder extends StatelessWidget {
               Container(
                 constraints: const BoxConstraints(maxWidth: 300),
                 padding: const EdgeInsets.symmetric(vertical: 24),
-                child: 'No work experiences added yet. Add work experience.'.bodySmall(
+                child: 'No certificate details added yet. Add certificate details.'.bodySmall(
                   context, height: 1.6, isCenter: true),
               ),
               SizedBox(

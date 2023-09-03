@@ -7,26 +7,37 @@ class Project extends Equatable {
 
   final String? name;
   final String? description;
+  final String? startDate;
+  final String? endDate;
+  final String? highlight;
   final List? technologiesUsed;
   final String? url;
 
   const Project({
     this.name,
     this.description,
+    this.startDate,
+    this.endDate,
+    this.highlight,
     this.technologiesUsed,
     this.url,
   });
 
-
   Project copyWith({
     String? name,
     String? description,
+    String? startDate,
+    String? endDate,
+    String? highlight,
     List? technologiesUsed,
     String? url,
   }) {
     return Project(
       name: name ?? this.name,
       description: description ?? this.description,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      highlight: highlight ?? this.highlight,
       technologiesUsed: technologiesUsed ?? this.technologiesUsed,
       url: url ?? this.url,
     );
@@ -36,6 +47,9 @@ class Project extends Equatable {
     return <String, dynamic>{
       'name': name,
       'description': description,
+      'startDate': startDate,
+      'endDate': endDate,
+      'highlight': highlight,
       'technologiesUsed': technologiesUsed,
       'url': url,
     };
@@ -45,7 +59,10 @@ class Project extends Equatable {
     return Project(
       name: map['name'] != null ? map['name'] as String : null,
       description: map['description'] != null ? map['description'] as String : null,
-      technologiesUsed: map['technologies_used'] != null ? List.from((map['technologies_used'] as List)) : null,
+      startDate: map['startDate'] != null ? map['startDate'] as String : null,
+      endDate: map['endDate'] != null ? map['endDate'] as String : null,
+      highlight: map['highlight'] != null ? map['highlight'] as String : null,
+      technologiesUsed: map['technologiesUsed'] != null ? map['technologiesUsed'] as List : null,
       url: map['url'] != null ? map['url'] as String : null,
     );
   }
@@ -58,5 +75,15 @@ class Project extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props => [];
+  List<Object> get props {
+    return [
+      name??'',
+      description??'',
+      startDate??'',
+      endDate??'',
+      highlight??'',
+      technologiesUsed??'',
+      url??'',
+    ];
+  }
 }

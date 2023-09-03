@@ -3,6 +3,7 @@ import 'package:portfolio_builder_ai/constants/colors_const.dart';
 import 'package:portfolio_builder_ai/constants/shadow_const.dart';
 import 'package:portfolio_builder_ai/extensions/int_ext.dart';
 import 'package:portfolio_builder_ai/network/models/basic.dart';
+import 'package:portfolio_builder_ai/network/models/location.dart';
 import 'package:portfolio_builder_ai/network/models/resume_schema.dart';
 import 'package:portfolio_builder_ai/presentation/editor/pages/template_editor/template_editor_viewmodel.dart';
 import 'package:portfolio_builder_ai/presentation/editor/widgets/launch_button.dart';
@@ -22,7 +23,7 @@ class _TemplateEditorViewState extends State<TemplateEditorView> {
 
   @override
   void initState() {
-    _viewModel = TemplateEditorViewModel(context, schema: const ResumeSchema(basic: Basic()))..initialize();
+    _viewModel = TemplateEditorViewModel(context, schema: const ResumeSchema(basic: Basic(), location: Location()))..initialize();
     super.initState();
   }
 
@@ -84,7 +85,8 @@ class _TemplateEditorViewState extends State<TemplateEditorView> {
                     boxShadow: ShadowConst.normal(context),
                   ),
                   child: TemplateView(schema: ResumeSchema(
-                    basic: _viewModel.basic.value
+                    basic: _viewModel.basic.value,
+                    location: const Location()
                   )),
                 ),
               )

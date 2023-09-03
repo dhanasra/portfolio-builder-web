@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio_builder_ai/network/models/work_experience.dart';
-import 'package:portfolio_builder_ai/presentation/forms/widgets/work/work_builder.dart';
-import 'package:portfolio_builder_ai/presentation/forms/widgets/work/work_fields.dart';
+import 'package:portfolio_builder_ai/network/models/reference.dart';
+import 'package:portfolio_builder_ai/presentation/forms/widgets/reference/builder.dart';
+import 'package:portfolio_builder_ai/presentation/forms/widgets/reference/fields.dart';
 import 'package:portfolio_builder_ai/widgets/e_button.dart';
 
 import '../../widgets/o_button.dart';
 
-class WorkForm extends StatelessWidget {
-  final List<WorkExperience> experience;
-  final ValueChanged<List<WorkExperience>> onChanged;
-  const WorkForm({
+class ReferenceForm extends StatelessWidget {
+  final List<Reference> reference;
+  final ValueChanged<List<Reference>> onChanged;
+  const ReferenceForm({
     super.key, 
-    required this.experience,
+    required this.reference,
     required this.onChanged
   });
 
@@ -21,19 +21,16 @@ class WorkForm extends StatelessWidget {
     final GlobalKey<FormState> formKey = GlobalKey();
     final ValueNotifier<AutovalidateMode> autovalidateMode = ValueNotifier(AutovalidateMode.disabled);
 
-    final ValueNotifier<List<WorkExperience>> works = ValueNotifier(experience);
+    final ValueNotifier<List<Reference>> works = ValueNotifier(reference);
 
     final ValueNotifier<bool> mode = ValueNotifier(false);
-    final ValueNotifier<WorkExperience?> edited = ValueNotifier(null);
+    final ValueNotifier<Reference?> edited = ValueNotifier(null);
 
-    final TextEditingController jobTitleController = TextEditingController();
-    final TextEditingController descriptionController = TextEditingController();
-    final TextEditingController employerController = TextEditingController();
-    final TextEditingController startDateController = TextEditingController();
-    final TextEditingController endDateController = TextEditingController();
-    final TextEditingController achievementsController = TextEditingController();
-
-
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController positionController = TextEditingController();
+    final TextEditingController organizationController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController phoneController = TextEditingController();
 
     return ValueListenableBuilder(
       valueListenable: mode,
@@ -45,16 +42,15 @@ class WorkForm extends StatelessWidget {
               ValueListenableBuilder(
                 valueListenable: edited,
                 builder: (_, val, __) {
-                  return WorkFields(
-                    works: works, 
+                  return ReferenceFields(
+                    references: works, 
                     mode: mode,
-                    experience: edited.value,
-                    achievementsController: achievementsController, 
-                    descriptionController: descriptionController, 
-                    employerController: employerController, 
-                    endDateController: endDateController, 
-                    jobTitleController: jobTitleController, 
-                    startDateController: startDateController, 
+                    reference: edited.value,
+                    nameController: nameController, 
+                    positionController: positionController, 
+                    organizationController: organizationController, 
+                    emailController: emailController, 
+                    phoneController: phoneController,  
                     autovalidateMode: autovalidateMode, 
                     formKey: formKey
                   );
@@ -64,11 +60,11 @@ class WorkForm extends StatelessWidget {
               ValueListenableBuilder(
                 valueListenable: works,
                 builder: (_, work, __) {
-                  return WorkBuilder(
-                    experience: work, 
+                  return ReferenceBuilder(
+                    reference: reference, 
                     mode: mode,
                     edited: edited,
-                    works: works,  
+                    references: works,  
                   );
                 }
               ),

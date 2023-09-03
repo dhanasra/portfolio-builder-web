@@ -3,10 +3,10 @@ import 'package:portfolio_builder_ai/extensions/int_ext.dart';
 import 'package:portfolio_builder_ai/extensions/string_ext.dart';
 import 'package:portfolio_builder_ai/network/models/work_experience.dart';
 
-import '../../../responsive/responsive_row_expanded.dart';
-import '../../../widgets/e_button.dart';
-import '../../../widgets/form_wav.dart';
-import '../../../widgets/input_field.dart';
+import '../../../../responsive/responsive_row_expanded.dart';
+import '../../../../widgets/e_button.dart';
+import '../../../../widgets/form_wav.dart';
+import '../../../../widgets/input_field.dart';
 
 class WorkFields extends StatelessWidget {
   final ValueNotifier<List<WorkExperience>> works;

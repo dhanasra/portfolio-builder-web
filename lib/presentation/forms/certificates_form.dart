@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio_builder_ai/network/models/work_experience.dart';
-import 'package:portfolio_builder_ai/presentation/forms/widgets/work/work_builder.dart';
-import 'package:portfolio_builder_ai/presentation/forms/widgets/work/work_fields.dart';
+import 'package:portfolio_builder_ai/network/models/certificate.dart';
+import 'package:portfolio_builder_ai/presentation/forms/widgets/certificates/builder.dart';
+import 'package:portfolio_builder_ai/presentation/forms/widgets/certificates/fields.dart';
 import 'package:portfolio_builder_ai/widgets/e_button.dart';
 
 import '../../widgets/o_button.dart';
 
-class WorkForm extends StatelessWidget {
-  final List<WorkExperience> experience;
-  final ValueChanged<List<WorkExperience>> onChanged;
-  const WorkForm({
+class CertificatesForm extends StatelessWidget {
+  final List<Certificate> certificate;
+  final ValueChanged<List<Certificate>> onChanged;
+  const CertificatesForm({
     super.key, 
-    required this.experience,
+    required this.certificate,
     required this.onChanged
   });
 
@@ -21,19 +21,15 @@ class WorkForm extends StatelessWidget {
     final GlobalKey<FormState> formKey = GlobalKey();
     final ValueNotifier<AutovalidateMode> autovalidateMode = ValueNotifier(AutovalidateMode.disabled);
 
-    final ValueNotifier<List<WorkExperience>> works = ValueNotifier(experience);
+    final ValueNotifier<List<Certificate>> works = ValueNotifier(certificate);
 
     final ValueNotifier<bool> mode = ValueNotifier(false);
-    final ValueNotifier<WorkExperience?> edited = ValueNotifier(null);
+    final ValueNotifier<Certificate?> edited = ValueNotifier(null);
 
-    final TextEditingController jobTitleController = TextEditingController();
-    final TextEditingController descriptionController = TextEditingController();
-    final TextEditingController employerController = TextEditingController();
-    final TextEditingController startDateController = TextEditingController();
-    final TextEditingController endDateController = TextEditingController();
-    final TextEditingController achievementsController = TextEditingController();
-
-
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController dateController = TextEditingController();
+    final TextEditingController issuerController = TextEditingController();
+    final TextEditingController urlController = TextEditingController();
 
     return ValueListenableBuilder(
       valueListenable: mode,
@@ -45,16 +41,14 @@ class WorkForm extends StatelessWidget {
               ValueListenableBuilder(
                 valueListenable: edited,
                 builder: (_, val, __) {
-                  return WorkFields(
-                    works: works, 
+                  return CertificateFields(
+                    certificates: works, 
                     mode: mode,
-                    experience: edited.value,
-                    achievementsController: achievementsController, 
-                    descriptionController: descriptionController, 
-                    employerController: employerController, 
-                    endDateController: endDateController, 
-                    jobTitleController: jobTitleController, 
-                    startDateController: startDateController, 
+                    certificate: edited.value,
+                    nameController: nameController, 
+                    dateController: dateController, 
+                    issuerController: issuerController, 
+                    urlController: urlController, 
                     autovalidateMode: autovalidateMode, 
                     formKey: formKey
                   );
@@ -64,11 +58,11 @@ class WorkForm extends StatelessWidget {
               ValueListenableBuilder(
                 valueListenable: works,
                 builder: (_, work, __) {
-                  return WorkBuilder(
-                    experience: work, 
+                  return CertificatesBuilder(
+                    certificate: certificate, 
                     mode: mode,
                     edited: edited,
-                    works: works,  
+                    certificates: works,  
                   );
                 }
               ),

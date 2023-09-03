@@ -5,47 +5,66 @@ import 'package:equatable/equatable.dart';
 
 class Education extends Equatable {
 
-  final String institution;
-  final String degree;
-  final String major;
-  final String graduationDate;
+  final String? institution;
+  final String? url;
+  final String? area;
+  final String? studyType;
+  final String? startDate;
+  final String? endDate;
+  final String? score;
 
   const Education({
-    required this.institution,
-    required this.degree,
-    required this.major,
-    required this.graduationDate,
+    this.institution,
+    this.url,
+    this.area,
+    this.studyType,
+    this.startDate,
+    this.endDate,
+    this.score,
   });
+
 
   Education copyWith({
     String? institution,
-    String? degree,
-    String? major,
-    String? graduationDate,
+    String? url,
+    String? area,
+    String? studyType,
+    String? startDate,
+    String? endDate,
+    String? score,
   }) {
     return Education(
       institution: institution ?? this.institution,
-      degree: degree ?? this.degree,
-      major: major ?? this.major,
-      graduationDate: graduationDate ?? this.graduationDate,
+      url: url ?? this.url,
+      area: area ?? this.area,
+      studyType: studyType ?? this.studyType,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      score: score ?? this.score,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'institution': institution,
-      'degree': degree,
-      'major': major,
-      'graduation_date': graduationDate,
+      'url': url,
+      'area': area,
+      'studyType': studyType,
+      'startDate': startDate,
+      'endDate': endDate,
+      'score': score,
     };
   }
 
   factory Education.fromMap(Map<String, dynamic> map) {
     return Education(
-      institution: map['institution'] as String,
-      degree: map['degree'] as String,
-      major: map['major'] as String,
-      graduationDate: map['graduation_date'] as String,
+      institution: map['institution'] != null ? map['institution'] as String : null,
+      url: map['url'] != null ? map['url'] as String : null,
+      area: map['area'] != null ? map['area'] as String : null,
+      studyType: map['studyType'] != null ? map['studyType'] as String : null,
+      startDate: map['startDate'] != null ? map['startDate'] as String : null,
+      endDate: map['endDate'] != null ? map['endDate'] as String : null,
+      score: map['score'] != null ? map['score'] as String : null,
     );
   }
 
@@ -57,5 +76,15 @@ class Education extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props => [institution, degree, major, graduationDate];
+  List<Object> get props {
+    return [
+      institution??'',
+      url??'',
+      area??'',
+      studyType??'',
+      startDate??'',
+      endDate??'',
+      score??'',
+    ];
+  }
 }

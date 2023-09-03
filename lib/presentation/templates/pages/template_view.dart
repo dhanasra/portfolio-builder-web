@@ -41,7 +41,7 @@ class _TemplateViewState extends State<TemplateView> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(widget.schema.name??'Hi !', 
+        title: Text(widget.schema.basic.name??'Hi !', 
           textAlign: TextAlign.center,
           style: GoogleFonts.poly(
             fontSize: 18,
@@ -109,13 +109,13 @@ class _TemplateViewState extends State<TemplateView> {
         controller: _viewModel.controller,
         children: [
           Header1(
-            name: widget.schema.name,
+            name: widget.schema.basic.name,
             designation: 'Flutter developer',
             key: _viewModel.headerKey,
           ),
-          if(widget.schema.summary!=null)
+          if(widget.schema.basic.summary!=null)
           About1(
-            about: widget.schema.summary!,
+            about: widget.schema.basic.summary!,
             key: _viewModel.aboutKey,
           ),
           Skills1(

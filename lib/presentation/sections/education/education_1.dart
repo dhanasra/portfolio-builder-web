@@ -66,7 +66,7 @@ class Education1 extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 32),
                           child: Column(
                             children: [
-                              Text('${e.degree} ${e.major}', 
+                              Text('${e.area} (${e.studyType})', 
                               textAlign: TextAlign.center,
                               style: GoogleFonts.poly(
                                 height: 1.6,
@@ -75,7 +75,7 @@ class Education1 extends StatelessWidget {
                                 color: Colors.white
                               )),
                         
-                              Text(e.institution, 
+                              Text(e.institution??"", 
                               textAlign: TextAlign.center,
                               style: GoogleFonts.poly(
                                 height: 1.6,
@@ -84,7 +84,7 @@ class Education1 extends StatelessWidget {
                                 color: Colors.white
                               )),
                         
-                              Text(e.graduationDate, 
+                              Text("${e.startDate} - ${e.endDate}", 
                               textAlign: TextAlign.center,
                               style: GoogleFonts.poly(
                                 height: 1.6,

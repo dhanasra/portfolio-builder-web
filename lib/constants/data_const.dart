@@ -7,14 +7,12 @@ class DataConst {
   static List<String> sections = [
     'Basics',
     'Work',
-    'Volunteer',
     'Education',
     'Awards',
     'Certificates',
     'Publications',
     'Skills',
     'Languages',
-    'Interests',
     'References',
     'Projects',
   ];
