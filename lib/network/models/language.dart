@@ -5,41 +5,36 @@ import 'package:equatable/equatable.dart';
 
 class Language extends Equatable {
 
-  final String language;
+  final String name;
   final String fluency;
-  final double value;
   const Language({
-    required this.language,
+    required this.name,
     required this.fluency,
-    required this.value,
   });
 
 
   Language copyWith({
-    String? language,
+    String? name,
     String? fluency,
     double? value,
   }) {
     return Language(
-      language: language ?? this.language,
+      name: name ?? this.name,
       fluency: fluency ?? this.fluency,
-      value: value ?? this.value,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'language': language,
+      'name': name,
       'fluency': fluency,
-      'value': value,
     };
   }
 
   factory Language.fromMap(Map<String, dynamic> map) {
     return Language(
-      language: map['language'] as String,
+      name: map['name'] as String,
       fluency: map['fluency']??'Native Speaker',
-      value: map['value']??3,
     );
   }
 
@@ -51,5 +46,5 @@ class Language extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props => [language, fluency, value];
+  List<Object> get props => [name, fluency];
 }

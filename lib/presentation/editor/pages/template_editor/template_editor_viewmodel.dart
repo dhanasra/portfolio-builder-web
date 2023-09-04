@@ -4,18 +4,22 @@ import 'package:portfolio_builder_ai/network/models/award.dart';
 import 'package:portfolio_builder_ai/network/models/basic.dart';
 import 'package:portfolio_builder_ai/network/models/certificate.dart';
 import 'package:portfolio_builder_ai/network/models/education.dart';
+import 'package:portfolio_builder_ai/network/models/language.dart';
 import 'package:portfolio_builder_ai/network/models/project.dart';
 import 'package:portfolio_builder_ai/network/models/publication.dart';
 import 'package:portfolio_builder_ai/network/models/reference.dart';
 import 'package:portfolio_builder_ai/network/models/resume_schema.dart';
+import 'package:portfolio_builder_ai/network/models/skills.dart';
 import 'package:portfolio_builder_ai/network/models/work_experience.dart';
 import 'package:portfolio_builder_ai/presentation/forms/awards_form.dart';
 import 'package:portfolio_builder_ai/presentation/forms/basics_form.dart';
 import 'package:portfolio_builder_ai/presentation/forms/certificates_form.dart';
 import 'package:portfolio_builder_ai/presentation/forms/education_form.dart';
+import 'package:portfolio_builder_ai/presentation/forms/languages_form.dart';
 import 'package:portfolio_builder_ai/presentation/forms/project_form.dart';
 import 'package:portfolio_builder_ai/presentation/forms/publication_form.dart';
 import 'package:portfolio_builder_ai/presentation/forms/reference_form.dart';
+import 'package:portfolio_builder_ai/presentation/forms/skills_form.dart';
 import 'package:portfolio_builder_ai/presentation/forms/work_form.dart';
 import 'package:portfolio_builder_ai/widgets/custom_drawer.dart';
 
@@ -38,6 +42,8 @@ class TemplateEditorViewModel extends BaseViewModel {
   late ValueNotifier<List<Certificate>> certificates;
   late ValueNotifier<List<Publication>> publications;
   late ValueNotifier<List<Reference>> references;
+  late ValueNotifier<List<Skills>> skills;
+  late ValueNotifier<List<Language>> languages;
 
   @override
   void initialize() {
@@ -54,6 +60,8 @@ class TemplateEditorViewModel extends BaseViewModel {
     certificates = ValueNotifier([]);
     publications = ValueNotifier([]);
     references = ValueNotifier([]);
+    skills = ValueNotifier([]);
+    languages = ValueNotifier([]);
   }
 
   openDrawer(){
@@ -167,6 +175,32 @@ class TemplateEditorViewModel extends BaseViewModel {
               certificate: value,
               onChanged: (updated){
                 certificates.value = updated;
+                closeDrawer();
+              },
+            );
+          }
+        ) 
+        : selectedItem=='skills'
+        ? ValueListenableBuilder(
+          valueListenable: skills,
+          builder: (_, value, __) {
+            return SkillsForm(
+              skills: value,
+              onChanged: (updated){
+                skills.value = updated;
+                closeDrawer();
+              },
+            );
+          }
+        )
+        : selectedItem=='languages'
+        ? ValueListenableBuilder(
+          valueListenable: languages,
+          builder: (_, value, __) {
+            return LanguagesForm(
+              languages: value,
+              onChanged: (updated){
+                languages.value = updated;
                 closeDrawer();
               },
             );
