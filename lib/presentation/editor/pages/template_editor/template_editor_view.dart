@@ -8,8 +8,8 @@ import 'package:portfolio_builder_ai/network/models/resume_schema.dart';
 import 'package:portfolio_builder_ai/presentation/editor/pages/template_editor/template_editor_viewmodel.dart';
 import 'package:portfolio_builder_ai/presentation/editor/widgets/launch_button.dart';
 import 'package:portfolio_builder_ai/presentation/editor/widgets/sections_sidenav.dart';
+import 'package:portfolio_builder_ai/presentation/editor/widgets/viewport_changer.dart';
 import 'package:portfolio_builder_ai/presentation/templates/pages/template_view.dart';
-import 'package:portfolio_builder_ai/widgets/b_container.dart';
 
 class TemplateEditorView extends StatefulWidget {
   const TemplateEditorView({super.key});
@@ -43,18 +43,8 @@ class _TemplateEditorViewState extends State<TemplateEditorView> {
           ),
           appBar: AppBar(
             centerTitle: true,
-            title: BContainer(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(Icons.desktop_windows_rounded, color: ColorsConst.primary,),
-                  16.width(),
-                  const Icon(Icons.phone_iphone, color: ColorsConst.grey,),
-                  16.width(),
-                  const Icon(Icons.tablet_android, color: ColorsConst.grey,)
-                ],
-              )
+            title: const ViewPortChanger(
+              
             ),
             actions: [
               IconButton(
