@@ -15,6 +15,7 @@ class AssetsConst {
   // static const google = '$imagesFolder/google.png';
 
   static const uploadResume = '$placeholder/upload-resume.png';
+  static const signin = '$placeholder/signin.png';
 
   static const uploading = '$gifsFolder/uploading.gif';
   static const parsing = '$gifsFolder/parsing.gif';

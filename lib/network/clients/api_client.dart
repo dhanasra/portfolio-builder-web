@@ -74,6 +74,7 @@ class ApiInterceptors extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async{
     if (loader) hideLoader();
 
+    
     if(err.response?.statusCode==401){
       // var data = await TokenService().getToken();
       // LocalDB.saveAccessToken(data['accessToken']);

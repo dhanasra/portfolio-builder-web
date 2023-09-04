@@ -7,6 +7,7 @@ class SplashLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         ShaderMask(
           shaderCallback: (Rect bounds) {

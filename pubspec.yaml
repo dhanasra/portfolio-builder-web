@@ -43,6 +43,7 @@ dependencies:
   # Widgets
   bot_toast: ^4.0.4
   dotted_border: ^2.0.0+3
+  google_sign_in: ^6.1.5
 
   # File Management
   file_picker: ^5.3.4
