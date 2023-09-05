@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio_builder_ai/base/base_viewmodel.dart';
-import 'package:portfolio_builder_ai/network/models/award.dart';
-import 'package:portfolio_builder_ai/network/models/basic.dart';
-import 'package:portfolio_builder_ai/network/models/certificate.dart';
-import 'package:portfolio_builder_ai/network/models/education.dart';
-import 'package:portfolio_builder_ai/network/models/language.dart';
-import 'package:portfolio_builder_ai/network/models/project.dart';
-import 'package:portfolio_builder_ai/network/models/publication.dart';
-import 'package:portfolio_builder_ai/network/models/reference.dart';
 import 'package:portfolio_builder_ai/network/models/resume_schema.dart';
-import 'package:portfolio_builder_ai/network/models/skills.dart';
-import 'package:portfolio_builder_ai/network/models/work_experience.dart';
+import 'package:portfolio_builder_ai/presentation/editor/cubits/schema_cubit.dart';
 import 'package:portfolio_builder_ai/presentation/forms/awards_form.dart';
 import 'package:portfolio_builder_ai/presentation/forms/basics_form.dart';
 import 'package:portfolio_builder_ai/presentation/forms/certificates_form.dart';
@@ -30,38 +22,20 @@ class TemplateEditorViewModel extends BaseViewModel {
   TemplateEditorViewModel(this.context,{required this.schema});
 
   late ValueNotifier<String?> selectedItem;
-  late ValueNotifier<ResumeSchema> resume;
+
+  late ResumeSchema resumeSchema;
+
+
   late ValueNotifier<bool> hideSideNav;
   late GlobalKey<ScaffoldState> scaffoldKey;
-
-  late ValueNotifier<Basic> basic;
-  late ValueNotifier<List<WorkExperience>> work;
-  late ValueNotifier<List<Education>> education;
-  late ValueNotifier<List<Project>> projects;
-  late ValueNotifier<List<Award>> awards;
-  late ValueNotifier<List<Certificate>> certificates;
-  late ValueNotifier<List<Publication>> publications;
-  late ValueNotifier<List<Reference>> references;
-  late ValueNotifier<List<Skills>> skills;
-  late ValueNotifier<List<Language>> languages;
 
   @override
   void initialize() {
     selectedItem = ValueNotifier(null);
-    resume = ValueNotifier(schema);
+    resumeSchema = schema;
+
     hideSideNav = ValueNotifier(false);
     scaffoldKey = GlobalKey();
-
-    basic = ValueNotifier(const Basic());
-    work = ValueNotifier([]);
-    education = ValueNotifier([]);
-    projects = ValueNotifier([]);
-    awards = ValueNotifier([]);
-    certificates = ValueNotifier([]);
-    publications = ValueNotifier([]);
-    references = ValueNotifier([]);
-    skills = ValueNotifier([]);
-    languages = ValueNotifier([]);
   }
 
   openDrawer(){
@@ -78,136 +52,112 @@ class TemplateEditorViewModel extends BaseViewModel {
       header: 'Enter $selectedItem details',
       onClose: ()=>closeDrawer(),
       child: selectedItem=='basics'
-        ? ValueListenableBuilder(
-          valueListenable: basic,
-          builder: (_, value, __) {
-            return BasicsForm(
-              basic: value, 
-              onChanged: (updated){
-                basic.value = updated;
-                closeDrawer();
-              });
-          }
-        )
-        : selectedItem=='work'
-        ? ValueListenableBuilder(
-          valueListenable: work,
-          builder: (_, value, __) {
-            return WorkForm(
-              experience: value,
-              onChanged: (updated){
-                work.value = updated;
-                closeDrawer();
-              },
+        ? BasicsForm(
+          basic: resumeSchema.basic, 
+          onChanged: (updated){
+            resumeSchema = resumeSchema.copyWith(
+              basic: updated
             );
-          }
+            updateResumeSchema();
+          })
+        : selectedItem=='work'
+        ? WorkForm(
+          experience: resumeSchema.workExperience,
+          onChanged: (updated){
+            resumeSchema = resumeSchema.copyWith(
+              workExperience: updated
+            );
+            updateResumeSchema();
+          },
         )
         : selectedItem=='education'
-        ? ValueListenableBuilder(
-          valueListenable: education,
-          builder: (_, value, __) {
-            return EducationForm(
-              education: value,
-              onChanged: (updated){
-                education.value = updated;
-                closeDrawer();
-              },
+        ? EducationForm(
+          education: resumeSchema.education,
+          onChanged: (updated){
+            resumeSchema = resumeSchema.copyWith(
+              education: updated
             );
-          }
+            updateResumeSchema();
+          },
         ) 
         : selectedItem=='projects'
-        ? ValueListenableBuilder(
-          valueListenable: projects,
-          builder: (_, value, __) {
-            return ProjectForm(
-              projects: value,
-              onChanged: (updated){
-                projects.value = updated;
-                closeDrawer();
-              },
+        ? ProjectForm(
+          projects: resumeSchema.projects,
+          onChanged: (updated){
+            resumeSchema = resumeSchema.copyWith(
+              projects: updated
             );
-          }
+            updateResumeSchema();
+          },
         )
         : selectedItem=='publications'
-        ? ValueListenableBuilder(
-          valueListenable: publications,
-          builder: (_, value, __) {
-            return PublicationForm(
-              publication: value,
-              onChanged: (updated){
-                publications.value = updated;
-                closeDrawer();
-              },
+        ? PublicationForm(
+          publication: resumeSchema.publications,
+          onChanged: (updated){
+            resumeSchema = resumeSchema.copyWith(
+              publications: updated
             );
-          }
+            updateResumeSchema();
+          },
         )
         : selectedItem=='references'
-        ? ValueListenableBuilder(
-          valueListenable: references,
-          builder: (_, value, __) {
-            return ReferenceForm(
-              reference: value,
-              onChanged: (updated){
-                references.value = updated;
-                closeDrawer();
-              },
+        ? ReferenceForm(
+          reference: resumeSchema.references,
+          onChanged: (updated){
+            resumeSchema = resumeSchema.copyWith(
+              references: updated
             );
-          }
+            updateResumeSchema();
+          },
         )
         : selectedItem=='awards'
-        ? ValueListenableBuilder(
-          valueListenable: awards,
-          builder: (_, value, __) {
-            return AwardsForm(
-              award: value,
-              onChanged: (updated){
-                awards.value = updated;
-                closeDrawer();
-              },
+        ? AwardsForm(
+          award: resumeSchema.awards,
+          onChanged: (updated){
+            resumeSchema = resumeSchema.copyWith(
+              awards: updated
             );
-          }
+            updateResumeSchema();
+          },
         )
         : selectedItem=='certificates'
-        ? ValueListenableBuilder(
-          valueListenable: certificates,
-          builder: (_, value, __) {
-            return CertificatesForm(
-              certificate: value,
-              onChanged: (updated){
-                certificates.value = updated;
-                closeDrawer();
-              },
+        ? CertificatesForm(
+          certificate: resumeSchema.certificates,
+          onChanged: (updated){
+            resumeSchema = resumeSchema.copyWith(
+              certificates: updated
             );
-          }
+            updateResumeSchema();
+          },
         ) 
         : selectedItem=='skills'
-        ? ValueListenableBuilder(
-          valueListenable: skills,
-          builder: (_, value, __) {
-            return SkillsForm(
-              skills: value,
-              onChanged: (updated){
-                skills.value = updated;
-                closeDrawer();
-              },
+        ? SkillsForm(
+          skills: resumeSchema.skills,
+          onChanged: (updated){
+            resumeSchema = resumeSchema.copyWith(
+              skills: updated
             );
-          }
+            updateResumeSchema();
+          },
         )
         : selectedItem=='languages'
-        ? ValueListenableBuilder(
-          valueListenable: languages,
-          builder: (_, value, __) {
-            return LanguagesForm(
-              languages: value,
-              onChanged: (updated){
-                languages.value = updated;
-                closeDrawer();
-              },
+        ? LanguagesForm(
+          languages: resumeSchema.languages,
+          onChanged: (updated){
+            resumeSchema = resumeSchema.copyWith(
+              languages: updated
             );
-          }
+            updateResumeSchema();
+          },
         ) : Container(),
-    );
+      );
+    }
+  
+  updateResumeSchema(){
+    closeDrawer();
+    context.read<SchemaCubit>().update(resumeSchema);
   }
+
 
   @override
   void dispose() {

@@ -126,7 +126,7 @@ class EducationFields extends StatelessWidget {
                   score: scoreController.trim()
                 );
                 if(education==null){
-                  works.value.add(newEducation);
+                  works.value = [...works.value, newEducation];
                 }else{
                   works.value[index] = newEducation;
                 }

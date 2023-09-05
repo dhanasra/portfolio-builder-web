@@ -4,6 +4,7 @@ import 'package:get/get_navigation/get_navigation.dart' as nav;
 import 'package:get/get.dart';
 import 'package:portfolio_builder_ai/presentation/authentication/bloc/auth_bloc.dart';
 import 'package:portfolio_builder_ai/presentation/authentication/pages/signin_view.dart';
+import 'package:portfolio_builder_ai/presentation/editor/cubits/schema_cubit.dart';
 import 'package:portfolio_builder_ai/presentation/editor/pages/template_editor/template_editor_view.dart';
 import 'package:portfolio_builder_ai/presentation/resume/bloc/resume_bloc.dart';
 import 'package:portfolio_builder_ai/presentation/resume/pages/upload/resume_upload_view.dart';
@@ -62,7 +63,10 @@ class RouteGenerator {
 
     GetPage(
         name: Routes.templateEditor,
-        page: () => const TemplateEditorView(),
+        page: () => BlocProvider(
+          create: (_)=>SchemaCubit(),
+          child: const TemplateEditorView(),  
+        ),
         middlewares: [
           AuthMustMiddleware()
         ],

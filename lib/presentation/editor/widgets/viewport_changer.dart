@@ -34,20 +34,20 @@ class _ViewPortChangerState extends State<ViewPortChanger> {
             ),
             16.width(),
             IconButton(
-              onPressed: ()=>setState(()=>screenType=DeviceScreenType.Mobile),
-              splashRadius: 20,
-              icon: Icon(
-                Icons.phone_iphone, 
-                color: screenType==DeviceScreenType.Mobile ? ColorsConst.primary : ColorsConst.grey),
-            ),
-            16.width(),
-            IconButton(
               onPressed: ()=>setState(()=>screenType=DeviceScreenType.Tablet),
               splashRadius: 20,
               icon: Icon(
                 Icons.tablet_android, 
                 color: screenType==DeviceScreenType.Tablet ? ColorsConst.primary : ColorsConst.grey),
             ),
+            16.width(),
+            IconButton(
+              onPressed: ()=>setState(()=>screenType=DeviceScreenType.Mobile),
+              splashRadius: 20,
+              icon: Icon(
+                Icons.phone_iphone, 
+                color: screenType==DeviceScreenType.Mobile ? ColorsConst.primary : ColorsConst.grey),
+            )
           ],
         )
       ),

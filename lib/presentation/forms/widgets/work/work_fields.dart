@@ -119,7 +119,7 @@ class WorkFields extends StatelessWidget {
                       achievements: achievementsController.trim().split(',')
                     );
                 if(experience==null){
-                  works.value.add(newExperience);
+                  works.value = [...works.value, newExperience];
                 }else{
                   works.value[index] = newExperience;
                 }

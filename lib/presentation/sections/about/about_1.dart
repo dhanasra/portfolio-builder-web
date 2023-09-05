@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_builder_ai/constants/colors_const.dart';
 import 'package:portfolio_builder_ai/extensions/int_ext.dart';
+import 'package:portfolio_builder_ai/network/models/basic.dart';
 
 import '../../../responsive/sizing_information.dart';
 
 class About1 extends StatelessWidget {
-  final String about;
-  const About1({super.key, required this.about});
+  final Basic basic;
+  const About1({super.key, required this.basic});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class About1 extends StatelessWidget {
                 
                     32.height(),
                 
-                    Text(about, 
+                    Text(basic.summary??'', 
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poly(
                       height: 1.6,

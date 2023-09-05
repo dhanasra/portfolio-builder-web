@@ -113,9 +113,9 @@ class _TemplateViewState extends State<TemplateView> {
             designation: 'Flutter developer',
             key: _viewModel.headerKey,
           ),
-          if(widget.schema.basic?.summary!=null)
+          if(widget.schema.basic!=null)
           About1(
-            about: widget.schema.basic?.summary??'',
+            basic: widget.schema.basic!,
             key: _viewModel.aboutKey,
           ),
           Skills1(

@@ -34,7 +34,6 @@ class WorkForm extends StatelessWidget {
     final TextEditingController achievementsController = TextEditingController();
 
 
-
     return ValueListenableBuilder(
       valueListenable: mode,
       builder: (_, isEdit, __) {
@@ -93,7 +92,7 @@ class WorkForm extends StatelessWidget {
                           width: 220,
                           child: EButton(
                             onClick: (){
-                              // onChanged(entries);
+                              onChanged(works.value);
                             }, 
                             text: 'Save'),
                         )
