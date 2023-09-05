@@ -41,7 +41,7 @@ class Certificate extends Equatable {
     };
   }
 
-  factory Certificate.fromMap(Map<String, dynamic> map) {
+  factory Certificate.fromMap(map) {
     return Certificate(
       name: map['name'] != null ? map['name'] as String : null,
       date: map['date'] != null ? map['date'] as String : null,

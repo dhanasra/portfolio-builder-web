@@ -4,7 +4,7 @@ import '../clients/api_client.dart';
 class AuthService {
 
   createUser({required String firstName,required String lastName,required String email,required String uid, String? picture})async{
-    final response = await ApiClient(ApisConst.apiHostAuth, loader: false).post(
+    final response = await ApiClient( ApisConst.authenticate, loader: false).post(
       {
         "firstName": firstName,
         "lastName": lastName,
@@ -15,14 +15,4 @@ class AuthService {
     );
     return response;
   }
-
-  getResumeSchema(String content)async{
-    final response = await ApiClient(ApisConst.resumeSchema, loader: false, isAICall: true).post(
-      {
-        'content': content
-      }
-    );
-    return response;
-  }
-
 }

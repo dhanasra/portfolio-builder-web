@@ -46,7 +46,7 @@ class Publication extends Equatable {
     };
   }
 
-  factory Publication.fromMap(Map<String, dynamic> map) {
+  factory Publication.fromMap(map) {
     return Publication(
       name: map['name'] != null ? map['name'] as String : null,
       publisher: map['publisher'] != null ? map['publisher'] as String : null,

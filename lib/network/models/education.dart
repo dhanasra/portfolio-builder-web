@@ -56,7 +56,7 @@ class Education extends Equatable {
     };
   }
 
-  factory Education.fromMap(Map<String, dynamic> map) {
+  factory Education.fromMap(Map map) {
     return Education(
       institution: map['institution'] != null ? map['institution'] as String : null,
       url: map['url'] != null ? map['url'] as String : null,

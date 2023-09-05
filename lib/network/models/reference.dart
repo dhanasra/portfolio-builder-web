@@ -46,7 +46,7 @@ class Reference extends Equatable {
     };
   }
 
-  factory Reference.fromMap(Map<String, dynamic> map) {
+  factory Reference.fromMap(map) {
     return Reference(
       name: map['name'] != null ? map['name'] as String : null,
       position: map['position'] != null ? map['position'] as String : null,

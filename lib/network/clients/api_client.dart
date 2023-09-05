@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../constants/apis_const.dart';
+import '../../database/local_db.dart';
 import '../../widgets/toast.dart';
 
 class ApiClient {
@@ -13,9 +14,9 @@ class ApiClient {
 
   final Map<String, String>? additionalHeaders;
 
-  ApiClient(this.path, {this.loader=true, this.errToast=true,this.additionalHeaders, bool isAICall = false}){
+  ApiClient(this.path, {this.loader=true, this.errToast=true,this.additionalHeaders, bool isAICall = false, bool isAuthCall = false}){
     dio = Dio();
-    dio.options.baseUrl = isAICall ? ApisConst.aiHost: ApisConst.apiHost;
+    dio.options.baseUrl = isAICall ? ApisConst.aiHost : ApisConst.apiHost;
     dio.interceptors.add(ApiInterceptors(
       dio: dio, 
       additionalHeaders: additionalHeaders,
@@ -110,12 +111,11 @@ class ApiInterceptors extends Interceptor {
 
     if(response.data!=null){
 
-      // if(response.data['accessToken']!=null){
-      //   LocalDB.saveAccessToken(response.data['accessToken']);
-      // }
-      // if(response.data['refreshToken']!=null){
-      //   LocalDB.saveRefreshToken(response.data['refreshToken']);
-      // }
+      var data = response.data['data'];
+      if((data is Map && data['accessToken']!=null) && (data['refreshToken']!=null)){
+        await LocalDB.saveAccessToken(data['accessToken']);
+        await LocalDB.saveRefreshToken(data['refreshToken']);
+      }
       
       if(response.data['status']=='success'){
         return handler.next(response);

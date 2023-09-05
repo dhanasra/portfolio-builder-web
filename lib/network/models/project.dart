@@ -9,7 +9,7 @@ class Project extends Equatable {
   final String? description;
   final String? startDate;
   final String? endDate;
-  final String? highlight;
+  final List? highlight;
   final List? technologiesUsed;
   final String? url;
 
@@ -28,7 +28,7 @@ class Project extends Equatable {
     String? description,
     String? startDate,
     String? endDate,
-    String? highlight,
+    List? highlight,
     List? technologiesUsed,
     String? url,
   }) {
@@ -55,13 +55,13 @@ class Project extends Equatable {
     };
   }
 
-  factory Project.fromMap(Map<String, dynamic> map) {
+  factory Project.fromMap(map) {
     return Project(
       name: map['name'] != null ? map['name'] as String : null,
       description: map['description'] != null ? map['description'] as String : null,
       startDate: map['startDate'] != null ? map['startDate'] as String : null,
       endDate: map['endDate'] != null ? map['endDate'] as String : null,
-      highlight: map['highlight'] != null ? map['highlight'] as String : null,
+      highlight: map['highlight'] != null ? map['highlight'] as List : null,
       technologiesUsed: map['technologiesUsed'] != null ? map['technologiesUsed'] as List : null,
       url: map['url'] != null ? map['url'] as String : null,
     );

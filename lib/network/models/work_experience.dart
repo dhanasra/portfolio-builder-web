@@ -50,7 +50,7 @@ class WorkExperience extends Equatable {
     };
   }
 
-  factory WorkExperience.fromMap(Map<String, dynamic> map) {
+  factory WorkExperience.fromMap( map) {
     return WorkExperience(
       jobTitle: map['job_title'] != null ? map['job_title'] as String : null,
       employer: map['employer'] != null ? map['employer'] as String : null,

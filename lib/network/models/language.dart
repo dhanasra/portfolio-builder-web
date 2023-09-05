@@ -15,8 +15,7 @@ class Language extends Equatable {
 
   Language copyWith({
     String? name,
-    String? fluency,
-    double? value,
+    String? fluency
   }) {
     return Language(
       name: name ?? this.name,
@@ -31,7 +30,7 @@ class Language extends Equatable {
     };
   }
 
-  factory Language.fromMap(Map<String, dynamic> map) {
+  factory Language.fromMap(map) {
     return Language(
       name: map['name'] as String,
       fluency: map['fluency']??'Native Speaker',

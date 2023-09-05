@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:portfolio_builder_ai/global.dart';
 import 'package:portfolio_builder_ai/network/models/user_model.dart';
 import 'package:portfolio_builder_ai/network/service/auth_service.dart';
+import 'package:portfolio_builder_ai/widgets/toast.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -20,6 +21,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   _onSignInWithGoogle(SignInWithGoogle event, Emitter emit)async{
     emit(Loading());
+    showLoader();
     try{
       GoogleAuthProvider googleProvider = GoogleAuthProvider();
       googleProvider.setCustomParameters({
@@ -46,6 +48,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       
     }catch(error){
       emit(Failure());
+    }finally{
+      hideLoader();
     }
   }
 

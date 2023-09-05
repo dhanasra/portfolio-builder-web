@@ -1,9 +1,12 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
+
 class LocalDB {
 
-  static init() async{
+  
+  static Future init() async{
     await Hive.initFlutter();
+    
     await Future.wait([
       Hive.openBox('user'),
       Hive.openBox('credentials')
@@ -11,12 +14,13 @@ class LocalDB {
   }
 
 
-  static final credentials = Hive.box('credentials');
+  static final session = Hive.box('credentials');
 
-  static saveAccessToken(value)=>credentials.put('accessToken', value);
-  static saveRefreshToken(value)=>credentials.put('refreshToken', value);
-  static getAccessToken()=>credentials.get('accessToken');
-  static getRefreshToken()=>credentials.get('refreshToken');
+  static saveAccessToken(value)=>session.put('accessToken', value);
+  static saveRefreshToken(value)=>session.put('refreshToken', value);
+
+  static getAccessToken()=>(session.get('accessToken'));
+  static getRefreshToken()=>(session.get('refreshToken'));
 
   static final user = Hive.box('user');
 
@@ -36,7 +40,7 @@ class LocalDB {
 
   static clearDB(){
     user.clear();
-    credentials.clear();
+    session.clear();
   }
 
 }

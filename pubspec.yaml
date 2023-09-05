@@ -25,7 +25,8 @@ dependencies:
 
   # Routing
   url_strategy: ^0.2.0
-  go_router: ^10.1.1
+  get: ^4.6.5
+  page_transition: ^2.0.9
 
   # DB
   hive_flutter: ^1.1.0
@@ -56,6 +57,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: ^2.4.6
 
 flutter:
 

@@ -17,8 +17,7 @@ import 'package:portfolio_builder_ai/network/models/work_experience.dart';
 
 class ResumeSchema extends Equatable {
 
-  final Basic basic;
-  final Location location;
+  final Basic? basic;
   final List<Education>? education;
   final List<WorkExperience>? workExperience;
   final List<Project>? projects;
@@ -30,8 +29,7 @@ class ResumeSchema extends Equatable {
   final List<Skills>? skills;
 
   const ResumeSchema({
-    required this.basic,
-    required this.location,
+    this.basic,
     this.education,
     this.workExperience,
     this.projects,
@@ -59,7 +57,6 @@ class ResumeSchema extends Equatable {
   }) {
     return ResumeSchema(
       basic: basic ?? this.basic,
-      location: location ?? this.location,
       education: education ?? this.education,
       workExperience: workExperience ?? this.workExperience,
       projects: projects ?? this.projects,
@@ -74,8 +71,7 @@ class ResumeSchema extends Equatable {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'basic': basic.toMap(),
-      'location': location.toMap(),
+      'basic': basic?.toMap(),
       'education': education?.map((x) => x.toMap()).toList(),
       'workExperience': workExperience?.map((x) => x.toMap()).toList(),
       'projects': projects?.map((x) => x.toMap()).toList(),
@@ -90,17 +86,16 @@ class ResumeSchema extends Equatable {
 
   factory ResumeSchema.fromMap(Map<String, dynamic> map) {
     return ResumeSchema(
-      basic: Basic.fromMap(map['basic'] as Map<String,dynamic>),
-      location: Location.fromMap(map['location'] as Map<String,dynamic>),
-      education: map['education'] != null ? List<Education>.from((map['education'] as List<int>).map<Education?>((x) => Education.fromMap(x as Map<String,dynamic>),),) : null,
-      workExperience: map['workExperience'] != null ? List<WorkExperience>.from((map['workExperience'] as List<int>).map<WorkExperience?>((x) => WorkExperience.fromMap(x as Map<String,dynamic>),),) : null,
-      projects: map['projects'] != null ? List<Project>.from((map['projects'] as List<int>).map<Project?>((x) => Project.fromMap(x as Map<String,dynamic>),),) : null,
-      awards: map['awards'] != null ? List<Award>.from((map['awards'] as List<int>).map<Award?>((x) => Award.fromMap(x as Map<String,dynamic>),),) : null,
-      certificates: map['certificates'] != null ? List<Certificate>.from((map['certificates'] as List<int>).map<Certificate?>((x) => Certificate.fromMap(x as Map<String,dynamic>),),) : null,
-      publications: map['publications'] != null ? List<Publication>.from((map['publications'] as List<int>).map<Publication?>((x) => Publication.fromMap(x as Map<String,dynamic>),),) : null,
-      references: map['references'] != null ? List<Reference>.from((map['references'] as List<int>).map<Reference?>((x) => Reference.fromMap(x as Map<String,dynamic>),),) : null,
-      languages: map['languages'] != null ? List<Language>.from((map['languages'] as List<int>).map<Language?>((x) => Language.fromMap(x as Map<String,dynamic>),),) : null,
-      skills: map['skills'] != null ? List<Skills>.from((map['skills'] as List<int>).map<Skills?>((x) => Skills.fromMap(x as Map<String,dynamic>),),) : null,
+      basic: Basic.fromMap(map['basics'] as Map),
+      education: map['education'] != null ? List<Education>.from((map['education'] as List).map<Education?>((x) => Education.fromMap(x as Map),),) : null,
+      workExperience: map['workExperience'] != null ? List<WorkExperience>.from((map['workExperience'] as List).map<WorkExperience?>((x) => WorkExperience.fromMap(x as Map),),) : null,
+      projects: map['projects'] != null ? List<Project>.from((map['projects'] as List).map<Project?>((x) => Project.fromMap(x as Map),),) : null,
+      awards: map['awards'] != null ? List<Award>.from((map['awards'] as List).map<Award?>((x) => Award.fromMap(x as Map),),) : null,
+      certificates: map['certificates'] != null ? List<Certificate>.from((map['certificates'] as List).map<Certificate?>((x) => Certificate.fromMap(x as Map),),) : null,
+      publications: map['publications'] != null ? List<Publication>.from((map['publications'] as List).map<Publication?>((x) => Publication.fromMap(x as Map),),) : null,
+      references: map['references'] != null ? List<Reference>.from((map['references'] as List).map<Reference?>((x) => Reference.fromMap(x as Map),),) : null,
+      languages: map['languages'] != null ? List<Language>.from((map['languages'] as List).map<Language?>((x) => Language.fromMap(x as Map),),) : null,
+      skills: map['skills'] != null ? List<Skills>.from((map['skills'] as List).map<Skills?>((x) => Skills.fromMap(x as Map),),) : null,
     );
   }
 
@@ -114,8 +109,7 @@ class ResumeSchema extends Equatable {
   @override
   List<Object> get props {
     return [
-      basic,
-      location,
+      basic??'',
       education??'',
       workExperience??'',
       projects??'',

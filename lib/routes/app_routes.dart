@@ -1,58 +1,71 @@
-import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:get/get_navigation/get_navigation.dart' as nav;
+import 'package:get/get.dart';
 import 'package:portfolio_builder_ai/presentation/authentication/bloc/auth_bloc.dart';
 import 'package:portfolio_builder_ai/presentation/authentication/pages/signin_view.dart';
 import 'package:portfolio_builder_ai/presentation/editor/pages/template_editor/template_editor_view.dart';
+import 'package:portfolio_builder_ai/presentation/resume/bloc/resume_bloc.dart';
 import 'package:portfolio_builder_ai/presentation/resume/pages/upload/resume_upload_view.dart';
-import 'package:portfolio_builder_ai/presentation/templates/pages/template_view.dart';
+import 'package:portfolio_builder_ai/routes/middlewares/auth_must_middleware.dart';
 
-import '../network/models/resume_schema.dart';
-import '../presentation/resume/bloc/resume_bloc.dart';
+import '../presentation/splash/splash_view.dart';
+import 'middlewares/auth_middleware.dart';
+
 
 class Routes {
 
-    static String uploadResume = 'upload-resume';
+    static const String splash = '/';
+    static const String signin = '/signin';
+    static const String uploadResume = '/upload-resume';
+    static const String template = '/template';
+    static const String templateEditor = '/template-editor';
 }
 
-final GoRouter router = GoRouter(
-  routes: <RouteBase>[
-    GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return BlocProvider(
-          create: (context) => AuthBloc(),
-          child: const SignInView(),
-        );
-      },
+
+Future<bool> signout() async {
+  await FirebaseAuth.instance.signOut();
+  return true;
+}
+
+class RouteGenerator {
+  static List<GetPage> pages = [
+    // Welcome Screens
+
+    GetPage(
+      name: Routes.splash,
+      page: () => const SplashView(),
+      transition: nav.Transition.noTransition,
     ),
-    GoRoute(
-      path: '/upload-resume',
-      name: Routes.uploadResume,
-      builder: (BuildContext context, GoRouterState state) {
-        return BlocProvider(
-          create: (context) => ResumeBloc(),
-          child: const ResumeUploadView(),
-        );
-      },
-    ),
-    GoRoute(
-      path: '/template',
-      name: 'template',
-      builder: (BuildContext context, GoRouterState state) {
-        return TemplateView(
-          schema: state.extra as ResumeSchema,
-        );
-      },
-    ),
-    GoRoute(
-      path: '/template-editor',
-      name: 'template-editor',
-      builder: (BuildContext context, GoRouterState state) {
-        return const TemplateEditorView(
-          
-        );
-      },
-    ),
-  ],
-);
+
+    GetPage(
+        name: Routes.signin,
+        page: () => BlocProvider(
+              create: (context) => AuthBloc(),
+              child: const SignInView(),
+            ),
+        middlewares: [
+          AuthMiddleware()
+        ],
+        transition: nav.Transition.noTransition),
+
+    GetPage(
+        name: Routes.uploadResume,
+        page: () => BlocProvider(
+            create: (_) => ResumeBloc(), 
+            child: const ResumeUploadView()
+        ),
+        middlewares: [
+          AuthMustMiddleware()
+        ],
+        transition: nav.Transition.noTransition),
+
+    GetPage(
+        name: Routes.templateEditor,
+        page: () => const TemplateEditorView(),
+        middlewares: [
+          AuthMustMiddleware()
+        ],
+        transition: nav.Transition.noTransition),
+  ];
+}

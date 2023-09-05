@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:get/get.dart';
 import 'package:portfolio_builder_ai/base/base_viewmodel.dart';
 import 'package:portfolio_builder_ai/presentation/authentication/bloc/auth_bloc.dart';
 import 'package:portfolio_builder_ai/routes/app_routes.dart';
@@ -18,7 +18,7 @@ class SignInViewModel extends BaseViewModel {
 
   handleState(state){
     if(state is UserDataFetched){
-      context.goNamed(Routes.uploadResume);
+      Get.toNamed(Routes.uploadResume);
     }else if(state is Failure){
       toast('Something wrong. Try again later', success: false);
     }

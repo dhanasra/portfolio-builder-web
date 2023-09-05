@@ -35,7 +35,7 @@ class Skills extends Equatable {
     };
   }
 
-  factory Skills.fromMap(Map<String, dynamic> map) {
+  factory Skills.fromMap(map) {
     return Skills(
       name: map['name'] != null ? map['name'] as String : null,
       level: map['level'] != null ? map['level'] as String : null,

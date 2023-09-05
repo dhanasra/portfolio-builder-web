@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:get/get.dart';
 import 'package:portfolio_builder_ai/constants/colors_const.dart';
 import 'package:portfolio_builder_ai/extensions/int_ext.dart';
 import 'package:portfolio_builder_ai/extensions/string_ext.dart';
 import 'package:portfolio_builder_ai/presentation/resume/pages/upload/resume_upload_viewmodel.dart';
+import 'package:portfolio_builder_ai/routes/app_routes.dart';
 import 'package:portfolio_builder_ai/widgets/bs_container.dart';
 import 'package:portfolio_builder_ai/widgets/e_button.dart';
 import 'package:portfolio_builder_ai/widgets/o_button.dart';
@@ -34,7 +35,7 @@ class _ResumeUploadViewState extends State<ResumeUploadView> {
     return BlocListener<ResumeBloc, ResumeState>(
       listener: (context, state) {
         if(state is ResumeParsed){
-          context.goNamed('template-editor', extra: state.schema);
+          Get.toNamed(Routes.templateEditor, arguments: state.schema);
         }
       },
       child: Scaffold(

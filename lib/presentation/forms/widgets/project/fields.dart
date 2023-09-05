@@ -47,7 +47,6 @@ class ProjectFields extends StatelessWidget {
     startDateController.text = project?.startDate??'';
     endDateController.text = project?.endDate??'';
     technologiesController.text = project?.technologiesUsed?.join(',')??'';
-    highLightController.text = project?.highlight??'';
     urlController.text = project?.url??'';
     
     int index = -1;
@@ -127,8 +126,7 @@ class ProjectFields extends StatelessWidget {
                   technologiesUsed: technologiesController.trim().split(','),
                   startDate: startDateController.trim(),
                   endDate: endDateController.trim(),
-                  url: urlController.trim(),
-                  highlight: highLightController.trim()
+                  url: urlController.trim()
                 );
                 if(project==null){
                   projects.value.add(newProject);

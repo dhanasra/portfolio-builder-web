@@ -40,7 +40,7 @@ class Award extends Equatable {
     };
   }
 
-  factory Award.fromMap(Map<String, dynamic> map) {
+  factory Award.fromMap(map) {
     return Award(
       title: map['title'] != null ? map['title'] as String : null,
       date: map['date'] != null ? map['date'] as String : null,
