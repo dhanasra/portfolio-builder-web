@@ -61,7 +61,6 @@ class ReferenceForm extends StatelessWidget {
                 valueListenable: works,
                 builder: (_, work, __) {
                   return ReferenceBuilder(
-                    reference: reference, 
                     mode: mode,
                     edited: edited,
                     references: works,  
@@ -89,7 +88,7 @@ class ReferenceForm extends StatelessWidget {
                           width: 220,
                           child: EButton(
                             onClick: (){
-                              // onChanged(entries);
+                              onChanged(works.value);
                             }, 
                             text: 'Save'),
                         )

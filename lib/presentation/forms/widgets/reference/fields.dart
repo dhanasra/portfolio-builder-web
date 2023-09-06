@@ -111,7 +111,7 @@ class ReferenceFields extends StatelessWidget {
                   phone: phoneController.trim()
                 );
                 if(reference==null){
-                  references.value.add(newProject);
+                  references.value = [...references.value, newProject];
                 }else{
                   references.value[index] = newProject;
                 }

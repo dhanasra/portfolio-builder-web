@@ -59,7 +59,6 @@ class CertificatesForm extends StatelessWidget {
                 valueListenable: works,
                 builder: (_, work, __) {
                   return CertificatesBuilder(
-                    certificate: certificate, 
                     mode: mode,
                     edited: edited,
                     certificates: works,  
@@ -87,7 +86,7 @@ class CertificatesForm extends StatelessWidget {
                           width: 220,
                           child: EButton(
                             onClick: (){
-                              // onChanged(entries);
+                              onChanged(works.value);
                             }, 
                             text: 'Save'),
                         )

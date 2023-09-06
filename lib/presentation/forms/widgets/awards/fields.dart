@@ -99,7 +99,7 @@ class AwardFields extends StatelessWidget {
                 );
 
                 if(award==null){
-                  awards.value.add(newProject);
+                  awards.value = [...awards.value, newProject];
                 }else{
                   awards.value[index] = newProject;
                 }

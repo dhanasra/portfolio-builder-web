@@ -30,7 +30,7 @@ class LanguagesForm extends StatelessWidget {
                 return ListView(
                   padding: const EdgeInsets.all(20),
                   children: [
-                    ...languages.map(
+                    ...val.map(
                       (language) => LanguageItem(
                         language: language, 
                         languageNotifier: languageNotifier)
@@ -63,7 +63,7 @@ class LanguagesForm extends StatelessWidget {
                         width: 220,
                         child: EButton(
                           onClick: (){
-                            // onChanged(entries);
+                            onChanged(value);
                           }, 
                           text: 'Save'),
                       )

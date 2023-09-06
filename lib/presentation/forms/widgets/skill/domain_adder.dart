@@ -38,11 +38,7 @@ class DomainAdder extends StatelessWidget {
               child: EButton(
                 onClick: (){
                   if(!formKey.currentState!.validate()) return;
-                  skillNotifier.value.add(
-                    Skills(
-                      domain: domainController.text
-                    )
-                  );
+                  skillNotifier.value = [...skillNotifier.value, Skills(domain: domainController.text)];
                   domainController.clear();
                   skillNotifier.notifyListeners();
 

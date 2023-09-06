@@ -61,7 +61,6 @@ class PublicationForm extends StatelessWidget {
                 valueListenable: works,
                 builder: (_, work, __) {
                   return PublicationBuilder(
-                    publication: publication, 
                     mode: mode,
                     edited: edited,
                     publications: works,  
@@ -89,7 +88,7 @@ class PublicationForm extends StatelessWidget {
                           width: 220,
                           child: EButton(
                             onClick: (){
-                              // onChanged(entries);
+                              onChanged(works.value);
                             }, 
                             text: 'Save'),
                         )

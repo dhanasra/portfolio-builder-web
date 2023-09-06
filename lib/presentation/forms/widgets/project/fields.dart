@@ -129,7 +129,7 @@ class ProjectFields extends StatelessWidget {
                   url: urlController.trim()
                 );
                 if(project==null){
-                  projects.value.add(newProject);
+                  projects.value=[ ...projects.value, newProject ];
                 }else{
                   projects.value[index] = newProject;
                 }

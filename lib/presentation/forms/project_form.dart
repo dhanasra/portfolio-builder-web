@@ -67,7 +67,6 @@ class ProjectForm extends StatelessWidget {
                 valueListenable: works,
                 builder: (_, work, __) {
                   return ProjectBuilder(
-                    project: projects, 
                     mode: mode,
                     edited: edited,
                     projects: works,  
@@ -95,7 +94,7 @@ class ProjectForm extends StatelessWidget {
                           width: 220,
                           child: EButton(
                             onClick: (){
-                              // onChanged(entries);
+                              onChanged(works.value);
                             }, 
                             text: 'Save'),
                         )

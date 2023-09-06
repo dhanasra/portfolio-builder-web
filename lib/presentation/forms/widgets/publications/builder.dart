@@ -9,13 +9,11 @@ import 'package:portfolio_builder_ai/widgets/o_button.dart';
 
 
 class PublicationBuilder extends StatelessWidget {
-  final List<Publication> publication;
   final ValueNotifier mode;
-  final ValueNotifier publications;
+  final ValueNotifier<List<Publication>> publications;
   final ValueNotifier edited;
   const PublicationBuilder({
     super.key, 
-    required this.publication,
     required this.edited,
     required this.mode,
     required this.publications
@@ -25,7 +23,7 @@ class PublicationBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Expanded(
-      child: publication.isNotEmpty
+      child: publications.value.isNotEmpty
         ? ListView(
           padding: const EdgeInsets.all(16),
           children: [
@@ -34,7 +32,7 @@ class PublicationBuilder extends StatelessWidget {
               text: 'Add New Publication'
             ),
             20.height(),
-            ...publication.map(
+            ...publications.value.map(
               (e) => PublicationItem(
                 publication: e,
                 onDelete: (){

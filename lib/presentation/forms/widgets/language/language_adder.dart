@@ -59,7 +59,7 @@ class LanguageAdder extends StatelessWidget {
                       fluency: fluency??''
                     );
 
-                    languageNotifier.value.add(language);
+                    languageNotifier.value = [...languageNotifier.value, language];
                     languageNotifier.notifyListeners();
                   }, 
                   splashRadius: 20,

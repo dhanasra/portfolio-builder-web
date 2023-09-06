@@ -81,7 +81,7 @@ class SkillsForm extends StatelessWidget {
                         width: 220,
                         child: EButton(
                           onClick: (){
-                            // onChanged(entries);
+                            onChanged(skillsNotifier.value);
                           }, 
                           text: 'Save'),
                       )

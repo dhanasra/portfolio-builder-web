@@ -11,7 +11,7 @@ import 'package:portfolio_builder_ai/widgets/o_button.dart';
 class AwardsBuilder extends StatelessWidget {
   final List<Award> award;
   final ValueNotifier mode;
-  final ValueNotifier awards;
+  final ValueNotifier<List<Award>> awards;
   final ValueNotifier edited;
   const AwardsBuilder({
     super.key, 
@@ -25,7 +25,7 @@ class AwardsBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Expanded(
-      child: award.isNotEmpty
+      child: awards.value.isNotEmpty
         ? ListView(
           padding: const EdgeInsets.all(16),
           children: [
@@ -34,7 +34,7 @@ class AwardsBuilder extends StatelessWidget {
               text: 'Add New Award'
             ),
             20.height(),
-            ...award.map(
+            ...awards.value.map(
               (e) => AwardItem(
                 award: e,
                 onDelete: (){

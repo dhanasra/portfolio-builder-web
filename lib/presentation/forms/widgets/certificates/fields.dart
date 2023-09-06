@@ -98,7 +98,7 @@ class CertificateFields extends StatelessWidget {
                 );
 
                 if(certificate==null){
-                  certificates.value.add(newProject);
+                  certificates.value = [...certificates.value, newProject];
                 }else{
                   certificates.value[index] = newProject;
                 }

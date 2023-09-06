@@ -9,13 +9,11 @@ import 'package:portfolio_builder_ai/widgets/o_button.dart';
 
 
 class ProjectBuilder extends StatelessWidget {
-  final List<Project> project;
   final ValueNotifier mode;
-  final ValueNotifier projects;
+  final ValueNotifier<List<Project>> projects;
   final ValueNotifier edited;
   const ProjectBuilder({
     super.key, 
-    required this.project,
     required this.edited,
     required this.mode,
     required this.projects
@@ -25,7 +23,7 @@ class ProjectBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Expanded(
-      child: project.isNotEmpty
+      child: projects.value.isNotEmpty
         ? ListView(
           padding: const EdgeInsets.all(16),
           children: [
@@ -34,7 +32,7 @@ class ProjectBuilder extends StatelessWidget {
               text: 'Add New Project'
             ),
             20.height(),
-            ...project.map(
+            ...projects.value.map(
               (e) => ProjectItem(
                 project: e,
                 onDelete: (){

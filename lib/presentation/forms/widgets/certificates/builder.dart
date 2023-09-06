@@ -9,13 +9,11 @@ import 'package:portfolio_builder_ai/widgets/o_button.dart';
 
 
 class CertificatesBuilder extends StatelessWidget {
-  final List<Certificate> certificate;
   final ValueNotifier mode;
-  final ValueNotifier certificates;
+  final ValueNotifier<List<Certificate>> certificates;
   final ValueNotifier edited;
   const CertificatesBuilder({
     super.key, 
-    required this.certificate,
     required this.edited,
     required this.mode,
     required this.certificates
@@ -25,7 +23,7 @@ class CertificatesBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Expanded(
-      child: certificate.isNotEmpty
+      child: certificates.value.isNotEmpty
         ? ListView(
           padding: const EdgeInsets.all(16),
           children: [
@@ -34,7 +32,7 @@ class CertificatesBuilder extends StatelessWidget {
               text: 'Add New Certificate'
             ),
             20.height(),
-            ...certificate.map(
+            ...certificates.value.map(
               (e) => CertificateItem(
                 certificate: e,
                 onDelete: (){

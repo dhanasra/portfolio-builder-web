@@ -109,7 +109,7 @@ class PublicationFields extends StatelessWidget {
                 );
 
                 if(publication==null){
-                  publications.value.add(newProject);
+                  publications.value = [ ...publications.value, newProject];
                 }else{
                   publications.value[index] = newProject;
                 }

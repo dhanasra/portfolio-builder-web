@@ -9,13 +9,11 @@ import 'package:portfolio_builder_ai/widgets/o_button.dart';
 
 
 class ReferenceBuilder extends StatelessWidget {
-  final List<Reference> reference;
   final ValueNotifier mode;
-  final ValueNotifier references;
+  final ValueNotifier<List<Reference>> references;
   final ValueNotifier edited;
   const ReferenceBuilder({
     super.key, 
-    required this.reference,
     required this.edited,
     required this.mode,
     required this.references
@@ -25,7 +23,7 @@ class ReferenceBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Expanded(
-      child: reference.isNotEmpty
+      child: references.value.isNotEmpty
         ? ListView(
           padding: const EdgeInsets.all(16),
           children: [
@@ -34,7 +32,7 @@ class ReferenceBuilder extends StatelessWidget {
               text: 'Add New Reference'
             ),
             20.height(),
-            ...reference.map(
+            ...references.value.map(
               (e) => ReferenceItem(
                 reference: e,
                 onDelete: (){
