@@ -12,9 +12,9 @@ class Parsing extends ResumeState {}
 class Building extends ResumeState {}
 
 class ResumeParsed extends ResumeState {
-  final ResumeSchema schema;
+  final Resume resume;
 
-  ResumeParsed(this.schema);
+  ResumeParsed(this.resume);
 }
 
 class Failure extends ResumeState {}

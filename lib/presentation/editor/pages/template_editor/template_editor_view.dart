@@ -12,6 +12,8 @@ import 'package:portfolio_builder_ai/presentation/editor/widgets/sections_sidena
 import 'package:portfolio_builder_ai/presentation/editor/widgets/viewport_changer.dart';
 import 'package:portfolio_builder_ai/presentation/templates/pages/template_view.dart';
 
+import '../../../../network/models/resume.dart';
+
 class TemplateEditorView extends StatefulWidget {
   const TemplateEditorView({super.key});
 
@@ -25,8 +27,7 @@ class _TemplateEditorViewState extends State<TemplateEditorView> {
 
   @override
   void initState() {
-    _viewModel = TemplateEditorViewModel(context,
-        schema: Get.arguments ?? const ResumeSchema())
+    _viewModel = TemplateEditorViewModel(context, resume: Get.arguments as Resume?)
       ..initialize();
     super.initState();
   }

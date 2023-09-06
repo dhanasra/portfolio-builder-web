@@ -35,7 +35,7 @@ class _ResumeUploadViewState extends State<ResumeUploadView> {
     return BlocListener<ResumeBloc, ResumeState>(
       listener: (context, state) {
         if(state is ResumeParsed){
-          Get.toNamed(Routes.templateEditor, arguments: state.schema);
+          Get.toNamed(Routes.templateEditor, arguments: state.resume);
         }
       },
       child: Scaffold(

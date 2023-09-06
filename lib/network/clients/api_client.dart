@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import '../../constants/apis_const.dart';
 import '../../database/local_db.dart';
 import '../../widgets/toast.dart';
+import '../service/token_service.dart';
 
 class ApiClient {
   late Dio dio;
@@ -63,9 +64,9 @@ class ApiInterceptors extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) async{
     if (loader) showLoader();
 
-    // var idToken = LocalDB.getAccessToken();
+    var idToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NGY4MWI2YzFmODlkZDk2MmI4NjkxNWYiLCJpYXQiOjE2OTM5OTQ1MzUsImV4cCI6MTY5NDU5OTMzNX0.V9UTK_nWe8SawJjDVJSNDPitFM779WiTPWNtONQrimg";
 
-    // if (idToken != null) options.headers["Authorization"] = "Bearer $idToken";
+    options.headers["Authorization"] = "Bearer $idToken";
     options.headers["Content-Type"] = "application/json";
 
     return handler.next(options);
@@ -77,9 +78,9 @@ class ApiInterceptors extends Interceptor {
 
     
     if(err.response?.statusCode==401){
-      // var data = await TokenService().getToken();
-      // LocalDB.saveAccessToken(data['accessToken']);
-      // LocalDB.saveRefreshToken(data['newRefreshToken']);
+      var data = await TokenService().getToken();
+      LocalDB.saveAccessToken(data['accessToken']);
+      LocalDB.saveRefreshToken(data['newRefreshToken']);
 
       try {
         final response = await dio.fetch(err.requestOptions);

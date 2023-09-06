@@ -1,13 +1,13 @@
 
-import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio_builder_ai/network/models/resume_schema.dart';
 import 'package:portfolio_builder_ai/network/service/resume_service.dart';
 import 'package:portfolio_builder_ai/widgets/toast.dart';
+
+import '../../../network/models/resume.dart';
 
 part 'resume_event.dart';
 part 'resume_state.dart';
@@ -27,11 +27,17 @@ class ResumeBloc extends Bloc<ResumeEvent, ResumeState> {
       toast('File uploaded');
       emit(Parsing());
       var parsedResume = await _service.parseResumeData(fileUrl);
-      toast('File parsed');
+      // toast('File parsed');
       emit(Building());
-      var data = await _service.getResumeSchema(parsedResume);
-      ResumeSchema schema = ResumeSchema.fromMap(json.decode(data));
-      emit(ResumeParsed(schema));
+      // var data = await _aiService.getResumeSchema(parsedResume);
+      var resumeData = await _service.createResume(
+        name: 'My Resume',
+        link: fileUrl,
+        parsed: parsedResume
+      );
+      print(resumeData);
+      var resume = Resume.fromMap(resumeData);
+      emit(ResumeParsed(resume));
     }catch(error){
       emit(Failure());
     }

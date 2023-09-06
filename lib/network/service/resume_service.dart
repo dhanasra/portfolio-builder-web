@@ -12,12 +12,48 @@ class ResumeService {
     return response;
   }
 
-  getResumeSchema(String content)async{
-    final response = await ApiClient(ApisConst.resumeSchema, loader: false, isAICall: true).post(
+  createResume({required String name, String? link, String? content,Map? schema, String? parsed})async{
+    final response = await ApiClient(ApisConst.resume, loader: false).post(
       {
-        'content': content
+        "name": name,
+        "link": link,
+        "parsed": parsed,
+        "content": content,
+        "schema": schema
       }
     );
+    return response;
+  }
+
+  update({required String resumeId, String? name, String? link, String? content,Map? schema})async{
+    final response = await ApiClient('${ApisConst.resume}?id=$resumeId', loader: false).put(
+      {
+        "name": name,
+        "link": link,
+        "content": content,
+        "schema": schema
+      }
+    );
+    return response;
+  }
+
+  delete({required String resumeId})async{
+    final response = await ApiClient('${ApisConst.resume}?id=$resumeId', loader: false).delete();
+    return response;
+  }
+
+  getResume({required String resumeId})async{
+    final response = await ApiClient('${ApisConst.resume}?id=$resumeId', loader: false).gets();
+    return response;
+  }
+
+  getMyResumes()async{
+    final response = await ApiClient(ApisConst.resumeGetUsers, loader: false).gets();
+    return response;
+  }
+
+  getAllResumes()async{
+    final response = await ApiClient(ApisConst.resumeGetAll, loader: false).gets();
     return response;
   }
 

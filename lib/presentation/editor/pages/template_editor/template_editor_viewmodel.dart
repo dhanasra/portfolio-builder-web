@@ -15,16 +15,16 @@ import 'package:portfolio_builder_ai/presentation/forms/skills_form.dart';
 import 'package:portfolio_builder_ai/presentation/forms/work_form.dart';
 import 'package:portfolio_builder_ai/widgets/custom_drawer.dart';
 
+import '../../../../network/models/resume.dart';
+
 class TemplateEditorViewModel extends BaseViewModel {
 
   final BuildContext context;
-  final ResumeSchema schema;
-  TemplateEditorViewModel(this.context,{required this.schema});
+  final Resume? resume;
+  TemplateEditorViewModel(this.context,{required this.resume});
 
   late ValueNotifier<String?> selectedItem;
-
   late ResumeSchema resumeSchema;
-
 
   late ValueNotifier<bool> hideSideNav;
   late GlobalKey<ScaffoldState> scaffoldKey;
@@ -32,7 +32,7 @@ class TemplateEditorViewModel extends BaseViewModel {
   @override
   void initialize() {
     selectedItem = ValueNotifier(null);
-    resumeSchema = schema;
+    resumeSchema = resume?.schema??const ResumeSchema();
 
     hideSideNav = ValueNotifier(false);
     scaffoldKey = GlobalKey();
